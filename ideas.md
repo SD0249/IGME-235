@@ -1,7 +1,8 @@
 # Project Ideas Brainstorm 
 ***********************************************
 ## Project 1 [One-Page Website]
-- Probably would be a personalized portfolio.
+- Probably would be a personalized portfolio website
+- Start making it, and constantly develop the page(refining)
 ***********************************************
 ## Project 2 [Web Service Application]
 - Search Engine? Idk what search stuff I would do, but maybe HTTYD or WOF search engine for Chloe?

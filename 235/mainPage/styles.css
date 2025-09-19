@@ -1,0 +1,60 @@
+  img {
+    float: right;
+    width: 350px;
+    height: 450px;
+    margin: 2em;
+    border-radius: 25%;
+    border: 10px solid #8D775F;
+  }
+
+  h1, h2 {
+    border-bottom: 3px solid #F1F0CC;
+    clear: both;
+    color: #A71D31;
+  }
+
+  .bio-container {
+    display: flex;
+    gap: 2em;
+    align-items: flex-start;
+    color: black;
+    font-size: 17px;
+  }
+
+  .bio-container img {
+    width: 350px;
+    height: 450px;
+  }
+
+  #float {
+    flex: 1;
+  }
+
+  .mogra-regular {
+    font-family: "Mogra", system-ui;
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  body {
+    background-color: #8D775F; 
+  }
+
+  main {
+    border-radius: 10%;
+    background-color: #D5BF86;
+    width: 80%;
+    margin: 0 auto;
+    padding: 2em;
+    padding-top: 1em;
+    margin-top: 2em;
+  }
+
+  a { text-decoration: none; }
+  a:link { color: #630508; }
+  a:visited { color: #d69595; }
+  a:focus { color: #D90429; }
+  a:hover { color: #D90429; }
+  a:active { color: #EF233C; }
+
+ 

@@ -20,13 +20,28 @@
         }
 
         body {
-            background-color: #CD9777;
+            background-color: #774936;
             font-family: Arial, sans-serif;
+            padding: 2em;
+        }
+
+        main, header, footer {
+            border: 1px solid #EDC4B3;
+            margin: 0 auto;
+            padding: 1rem;
+            background-color: #CD9777;
         }
 
         h1, h2 { 
             color: teal;
             font-family: 'Bitcount Grid Double', sans-serif;
+        }
+
+        h2 { margin-left: 50px; }
+
+        ul { 
+            padding-inline-start: 100px; 
+            width: 30%;
         }
 
         li {
@@ -36,6 +51,7 @@
         p {
             margin-left: 100px;
             background-color: #DEAB90;
+            width: 65%;
         }
 
         object {
@@ -45,12 +61,24 @@
 
         img.side {
             float: right;
-            margin: 0 12px;
+            margin: 2em 12px;
         }
 
         blockquote {
             background-color: #E6B8A2;
+            padding: 1rem;
         }
+
+        .left {
+            padding-inline-start:100px;
+        }
+
+        a { text-decoration: none; }
+        a:link { color: #630508; }
+        a:visited { color: #d69595; }
+        a:focus { color: #D90429; }
+        a:hover { color: #D90429; }
+        a:active { color: #EF233C; }
     </style>
 </head>
 
@@ -102,7 +130,7 @@
         <hr />
         <footer>
         <h2 id="sourceId">Source</h2>
-        <cite><a href="https://www.mobygames.com/game/arcade/dig-dug" target="_blank">Official Site</a></cite>
+        <cite><a class="left" href="https://www.mobygames.com/game/arcade/dig-dug" target="_blank">Official Site</a></cite>
         </footer>
     </main>
 </body>

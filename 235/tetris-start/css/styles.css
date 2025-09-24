@@ -1,21 +1,54 @@
-h2 {
+h1, h2, h3 {
     border-bottom: 1px solid red;
-    clear: both;
 }
 
-div {
-    border: 2px solid green;
+body {
+    max-width: 650px;
+    overflow: hidden;
+    overflow: scroll;
+    margin: 0 auto;
 }
 
-#tetlist:after {
-    content: " ";
+body img {
+    width: 100%;
+}
+
+header, footer, main {
+    width: 90%;
+    margin: 0 auto;
+}
+
+#tetlist {
+    display: flex;
+    flex-flow: row wrap;
+    gap: 1rem;
+}
+
+.tet {
+    flex: 0 1 180px;
+    border: 1px solid black;
+    text-align: center;
+}
+
+.tet img {
+    width: 60%;
     display: block;
-    clear: both;
-    float: right;
-    width: 40%;
-    margin: 5em;
+    margin: 0 auto;
+}
+
+.tet span {
+    display: block;
+    margin: 5px 0;
+    font-size: 20px;
+    font-weight: bold;
 }
 
 .aliases {
-    margin-bottom: 3em;
+    text-align: left;
+    margin: 1em;
 }
+
+
+
+
+

@@ -1,0 +1,39 @@
+h2 {
+    border-bottom: 1px solid red;
+    clear: both;
+}
+
+#tetlist:after {
+    content: " ";
+    display: block;
+    clear: both;
+    width: 40%;
+    margin: 5em;
+}
+
+div {
+    border: 2px solid green;
+    float: left;
+    justify-content: flex-start;
+}
+
+img {
+    margin: 3em;
+}
+
+header, main {
+    z-index: 5;
+}
+
+footer {
+    clear: both;
+    position: fixed;
+    top: -20px;
+    z-index: -1;
+}
+
+
+
+
+
+

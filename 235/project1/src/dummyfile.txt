@@ -1,0 +1,1 @@
+All other files used/referenced in this project(but not found on the pages) should be stored here. PDFs of source designs, responsive sketches, etc.

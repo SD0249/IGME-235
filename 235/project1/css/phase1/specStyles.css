@@ -1,0 +1,93 @@
+/* Base Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #fefbe9;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+main.grid {
+    display: grid;
+    grid-template-areas:
+        "header"
+        "projects"
+        "footer";
+    grid-template-rows: auto 1fr auto;
+    gap: 1.5rem;
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 1rem;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Header */
+header {
+    grid-area: header;
+    text-align:center;
+}
+
+.emp1, .emp2 {
+    font-size: 1.5em;
+    text-transform: uppercase;
+    margin-bottom: 0.3rem;
+    color: #000;
+    font-weight: bold;
+}
+
+/* Projects */
+.projects {
+    grid-area: projects;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.project {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.groupProj {
+    color: #a4328f;
+    margin-bottom: 0.4rem;
+}
+
+.summer {
+    color: #ff8725;
+    margin-bottom: 0.4rem;
+}
+
+.education {
+    color: #e8d82c;
+    margin-bottom: 0.4rem;
+}
+
+.passion {
+    color: #8eda5c;
+    margin-bottom: 0.4rem;
+}
+
+.learning {
+    color: #dd1d1d;
+    margin-bottom: 0.4rem;
+}
+
+.progress {
+    color: #72b6f5;
+    margin-bottom: 0.4rem;
+}
+
+.project p {
+    font-size: 0.95rem;
+    line-height: 1.4;
+}
+
+/* Footprint Number */
+
+
+/* Footer */

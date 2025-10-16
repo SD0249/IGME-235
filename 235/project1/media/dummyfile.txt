@@ -1,1 +1,0 @@
-All images, videos, fonts, favicons, etc used in the pages should go in this new directory

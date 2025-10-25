@@ -5,55 +5,104 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Project 1_Phase 2</title>
         <link rel="stylesheet" href="css/phase2/indexStyles.css" />
+    </head>    
     <body>
         <header>
             <h1>Devlog: From <span class="highlight">Idea</span> To <span class="highlight">Execution</span></h1>
         </header>
 
+        <nav>
+            <div class="nav-container">
+                <ul>
+                    <li><a href="https://github.com/SD0249/Sweet-Dreams_SugarRush" target="blank">Sweet Dreams</a></li>
+                    <li><a href="https://github.com/SD0249/MysticMenu" target="blank">Mystic Menu_Camera</a></li>
+                    <li><a href="https://github.com/SD0249/Faraday" target="blank">Physics Engine & Math Library</a></li>
+                    <li><a href="https://github.com/SD0249/Demon-Engine" target="blank">Demon_Custom C++ Game Engine</a></li>
+                </ul>
+
+                <button class="hamburger" aria-label="Menu">    <!-- Aria Label: Tells the screen readers what the button does-->
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+
+            <div class="mobile-menu">
+                <a href="https://github.com/SD0249/Sweet-Dreams_SugarRush" target="blank">Sweet Dreams</a>
+                <a href="https://github.com/SD0249/MysticMenu" target="blank">Mystic Menu_Camera</a>
+                <a href="https://github.com/SD0249/Faraday" target="blank">Physics Engine & Math Library</a>
+                <a href="https://github.com/SD0249/Demon-Engine" target="blank">Demon_Custom C++ Game Engine</a>
+            </div>
+        </nav>
+
         <main>
             <div class="projects">
                 <div class="project1">
-                    <h2 class="groupProj">Sweet Dreams</h2>
+                    <div class="mobile-title">
+                        <div class="mobile-foot odd"><span>1</span></div>
+                        <h2 class="groupProj">Sweet Dreams</h2>
+                    </div>
+                    
                     <p>
                         This project was a group project to make a game, applying the data structures and design patterns learnt in class, and adapting to Game Development processes within the given time frame. While we first had a system to manually offset the world by the player’s movement, I have made a camera class to apply a translation matrix to offset the world altogether, and set the bounds of the world to decide whether to draw the object or not, checking if they are on the screen.
                         <img src="media/sweetDreams.png" alt="Sweet Dreams Gameplay Screen" class="float-left">
                     </p>
                 </div>
                 <div class="project2">
-                    <h2 class="summer">MonoGame Camera Class</h2>
+                    <div class="mobile-title">
+                        <div class="mobile-foot even"><span>2</span></div>
+                        <h2 class="summer">MonoGame Camera Class</h2>
+                    </div>
+                    
                     <p>
                         This is an ongoing project where it will be an adventure story cooking game. I’m still very much interested in learning how matrices can be applied to cameras, and how they move the coordinate spaces, so in this project, I develop the camera class that I made in the previous project by adding scaling and zooming, while not making the same mistake of tying the screen of the viewport to the camera. In this version, the camera shows the portion of the world, and moves along with the player using matrix transformations, and the rendering logic made by my friend handles adapting to the scene.
                         <img src="media/camClass.gif" alt="Camera Demonstration" class="float-right">
                     </p>
                 </div>
                 <div class="project3">
-                    <h2 class="education">Math Library - Sandbox</h2>
+                    <div class="mobile-title">
+                        <div class="mobile-foot odd"><span>3</span></div>
+                        <h2 class="education">Math Library - Sandbox</h2>
+                    </div>
+                    
                     <p>
                         Over the summer, I learnt Linear Algebra. I found these concepts being applied to Computer Graphics and Game Simulations, such as implementing a camera, raycasting, etc, fascinating. While researching and structuring the Physics Engine, I thought it would be nice to have a Math Library inside the Physics Engine(Library) that it can use, holding essential mathematical components like Vector, Matrices, and Quaternions. When coding these, it can be fun, but I thought it would be just boring to see the numbers during the debugging process. For that reason, I thought of a visualized debugger that shows the changes right at run-time, drawing the operations of vectors, matrices, and quaternions, so I can have fun during the debugging process. Also, if this idea fully comes to life, I think it would be a nice tool to learn Linear Algebra in an interactive way.
                         <img src="media/MathLibVisual.PNG" alt="Math Lib Debug Tool Visualize" class="float-left">
                     </p>
                 </div>
                 <div class="project4">
-                    <h2 class="passion">Physics Engine - Calculator</h2>
+                    <div class="mobile-title">
+                        <div class="mobile-foot even"><span>4</span></div>
+                        <h2 class="passion">Physics Engine - Calculator</h2>
+                    </div>
+                    
                     <p>
                         I personally love Physics, as it explains the real-world phenomena mathematically, solving the consequent question ‘Why?’ of what happens. I always thought games are so cool in this way, that brings a world to life, following the rules of Physics. For my passion, I thought of bringing Physics into code, as I enjoyed understanding Discrete Math concepts with some code, which would deepen my understanding of Physics and give me practice in structuring a framework. Currently, I have finished researching what classes I would have, how they would tie in with each other, and an architecture diagram that encompasses all of them together. I think this will be beautiful if used together with OpenGL, visually.
                         <img src="media/PhysicsEngineArchietecture.png" alt="Faraday Architecture" class="float-right">
                     </p>
                 </div>
-                <article class="project5">
-                    <h2 class="learning">Custom Game Engine</h2>
+                <div class="project5">
+                    <div class="mobile-title">
+                        <div class="mobile-foot odd"><span>5</span></div>
+                        <h2 class="learning">Custom Game Engine</h2>
+                    </div>
+                    
                     <p>
                         I have found Unity and Unreal to be too comfortable to use when developing Games. While they are incredible in ways that cut down the development time, when I just use a function or a feature in Game Engines, I feel like I don’t actually understand how it is done, the processes under the function. For that purpose, to deepen my understanding of how a Game Engine is structured, and how its features are made, why they made that design choice, how it is abstracted, I decided to follow a lecture online to make a Custom C++ Game Engine, tweaking and adding my own features in between. So far, learning how to make a window and its components, knowing why an application class or a game object class is needed, has been very satisfying.
                         <img src="media/GameEngine.PNG" alt="Game Object Code" class="float-left">
                     </p>
-                </article>
-                <article class="project6">
-                    <h2 class="progress">Put Things together</h2>
+                </div>
+                <div class="project6">
+                    <div class="mobile-title">
+                        <div class="mobile-foot even"><span>6</span></div>
+                        <h2 class="progress">Put Things together</h2>
+                    </div>
+                    
                     <p>
                         Most of these projects are ongoing, but I plan to finish most of them until this academic year. They will all come together in a way that the math library will be used as components for the Custom Physics Engine, the Custom Game Engine will have the Custom Physics Engine as a plugin, and I plan to write additional features that calculate things needed for a Custom model to have procedural animation. The model would come to life, animated procedurally, and act based on the Physics Rules that are written.
                         <img src="media/DinoModel.png" alt="Model to be brought to life" class="float-right">
                     </p>
-                </article>
+                </div>
 
                 <div class="footstep">
                     <div class="f1 odd">
@@ -93,8 +142,6 @@
                 </div>
             </div>
             
-            
-
             <footer>
                 <h3>Socials</h3>
                 <section class="Socials">
@@ -103,5 +150,26 @@
                 </section>
             </footer>
         </main>
+
+        <script>
+            const hamburger = document.querySelector('.hamburger');
+            const mobileMenu = document.querySelector('.mobile-menu');
+
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('active');
+                mobileMenu.classList.toggle('open');
+                // Add a class to body to disable page scrolling while a full-screen menu is open
+                document.body.classList.toggle('menu-open');
+            });
+
+            // Close Menu when clicking a link
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    hamburger.classList.remove('active');
+                    mobileMenu.classList.remove('open');
+                    document.body.classList.remove('menu-open');
+                });
+            });
+        </script>
     </body>
 </html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="utf-8" />
+   <title>DOM-2</title>
+   <style>
+      body{border:1px solid gray;}
+   </style>
+</head>
+<body>
+<h1>My Page</h1>
+<h2>Info</h2>
+<h2>Pictures</h2>
+<h2>Info</h2>
+<p>Blah Blah Blah</p>
+<p>Blah Blah Blah</p>
+<footer>Copyright &copy; 20XX</footer>
+<script>
+      "use strict";
+      // The page has loaded, so it's "safe" to search for elements!
+
+      // first, get a REFERENCE to the first <h1> on the page
+      // we get an error because code is running before the web page has loaded
+      // document.querySelector(selector) / document.querySelectorAll(selector) [Returns a DOM Node List]
+      let h1 = document.querySelector("h1");
+
+      // second, change its HTML(the value of a PROPERTY of the element)
+      h1.innerHTML = "My <i>UFO</i> Page";	
+
+      document.querySelector("footer").innerHTML = "Copyright, Me!";
+   </script>
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>Web Apps-4-HW</title>
+	<style>
+		body{border:1px solid gray;}
+	</style>
+</head>
+<body>
+<h1>My Favorites</h1>
+<h2>My Favorite Colors</h2>
+
+<ol id="colorsList">
+	
+</ol>
+
+<h2>My Favorite Foods</h2>
+
+<ol id="foodsList">
+	
+</ol>
+
+<h2>My Favorite Links</h2>
+
+<ol id="linksList">
+	
+</ol>
+
+<script>
+"use strict";
+let colors = ["red","green","blue","purple","pink"];
+let foods = ["Ramen", "Pho", "Sashimi"]; // add some foods
+
+// Optional - can you figure out how to pull both the key AND the value
+// from the `links` object literal?
+let links = {
+		"RIT": "http://www.rit.edu",
+		"RWAG" : "https://www.facebook.com/RWAGclub",
+		"New Media Club" : "http://newmediaclub.cias.rit.edu"
+	}
+
+// Function to populate the given list using the data inside script
+function createList(listElement, array) {
+
+    // Loop through the given array 
+    for(let i = 0; i < array.length; i++)
+    {
+        // Generate list items
+        let item = document.createElement("li");
+        item.innerHTML = array[i];
+
+        // Append them to the correct list element
+        listElement.appendChild(item)
+    }
+
+}
+
+// Get colors array element 
+let colorsList = document.getElementById("colorsList");
+
+// Loop through colors array    
+// for(let i = 0; i < colors.length; i++)
+// {
+//     // Generate list items
+//     let color = document.createElement("li");
+//     color.innerHTML = colors[i];
+
+//     // Append them to the correct list element
+//     colorsList.appendChild(color);
+// }
+
+// -> Use function!
+createList(colorsList, colors);
+
+// Get foods array element
+let foodsList = document.getElementById("foodsList");
+
+// Loops through foods array
+// for(let food of foods)
+// {
+//     // Generate list items
+//     let foodListitem = document.createElement("li");
+//     foodListitem.innerHTML = food;
+    
+//     // Append them to the correct list element
+//     foodsList.appendChild(foodListitem);
+// }
+
+// -> Use function!
+createList(foodsList, foods);
+
+// Get links array element
+let linksList = document.getElementById("linksList");
+
+// Loop through given links object
+for(let link in links)
+{
+    // Generate list item for links array that has link element
+    let linkListitem = document.createElement("li");
+    let linkElement = document.createElement("a");
+    linkElement.innerHTML = link;
+    linkElement.href = links[link];
+    linkListitem.appendChild(linkElement);
+
+    // Add it to the appropriate links array element
+    linksList.appendChild(linkListitem);
+}
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>Image Gallery</title>
+	<style>
+		body {
+			font-family: "Helvetica","Arial",serif;
+			color: #333;
+			background-color: #fff;
+			margin: 1em 10%;
+			}
+			
+			#main {
+				padding-top: 30px;
+				width: 400px;
+				margin: 0 auto;
+			}
+			
+			span[data-image]{
+				transition-property: opacity;
+				transition-duration: 0.5s;
+				color: #c60;
+				background-color: transparent;
+				font-weight: bold;
+				text-decoration: none;
+				cursor: pointer;
+			}
+			
+			span[data-image]:hover{
+				opacity: 0.5;
+			}
+			
+			h1 {
+			color: #333;
+			background-color: transparent;
+			}
+			
+			ul {
+			padding: 0;
+			}
+			
+			li {
+			float: left;
+			padding: 1em;
+			list-style: none;
+			}
+			
+			img {
+			display:block;
+			clear: both;
+			box-shadow: 7px 7px 5px #888;
+			border:1px solid #aaa;
+			transition-property: opacity;
+			transition-duration: 0.5s;
+			}
+
+			footer{
+				font-size:70%;
+				color:#bbb;
+				text-align:center;
+			}
+	</style>
+</head>
+<body>
+	<section id="main">
+      <h1>Snapshots</h1>
+      <ul>
+        <li><span data-image="cassie.jpg" title="Dog named Cassie looking towards you">Cassie</span></li>
+        <li><span data-image="seal.jpg" title="Seal smiling">Seal</span></li>
+        <li><span data-image="wolf.jpg" title="Wolf Staring">Wolf</span></li>
+        <li><span data-image="eagle.jpg" title="Eagle in snowy land">Eagle</span></li>
+      </ul>
+      <div id="imagewrapper">
+        <img id="placeholder" src="images/placeholder.gif" alt="my image gallery" />
+      </div>
+
+    <p id="description">Choose an image.</p>
+     <footer>
+        <p>For IGME-235 Introduction to Web Technology for Game Developers</p>
+     </footer>
+    </section>
+
+    <script>
+	/*
+	The name of the image is stored in the data-image (custom data) attribute of each
+	span. In JavaScript we access these custom data properties using the .dataset 
+	property. We also covered this in web-apps-6.
+	*/
+
+	// 1. Get reference to div and span elements
+	let display = document.getElementById("placeholder");
+	let listItems = document.querySelector("ul");
+
+	// 2. Declaring an arrow function that can be called later for clicking spans and displaying images
+	let imageDisplay = (e) => {
+		let choice = e.target.dataset.dataImage;
+		if(choice == "cassie.jpg")
+		{
+			display.src = "images/cassie.jpg";
+			display.alt = "Dog named Cassie looking towards you";
+		}
+		else if(choice == "seal.jpg")
+		{
+			display.src = "images/seal.jpg";
+			display.alt = "Seal smiling";
+		}
+		else if (choice == "wolf.jpg")
+		{
+			display.src = "images/wolf.jpg";
+			display.alt = "Wolf Staring";
+		}
+		else if (choice == "eagle.jpg")
+		{
+			display.src = "images/eagle.jpg";
+			display.alt = "Eagle in snowy land";
+		}
+	}
+
+	// 3. Add events
+	
+	</script>
+</body>
+</html>
+
+

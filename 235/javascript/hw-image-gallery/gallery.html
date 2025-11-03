@@ -90,11 +90,11 @@
 
 	// 1. Get reference to div and span elements
 	let display = document.getElementById("placeholder");
-	let listItems = document.querySelector("ul");
+	let spans = document.querySelectorAll("span[data-image]")
 
 	// 2. Declaring an arrow function that can be called later for clicking spans and displaying images
 	let imageDisplay = (e) => {
-		let choice = e.target.dataset.dataImage;
+		let choice = e.target.dataset.image;
 		if(choice == "cassie.jpg")
 		{
 			display.src = "images/cassie.jpg";
@@ -113,11 +113,14 @@
 		else if (choice == "eagle.jpg")
 		{
 			display.src = "images/eagle.jpg";
-			display.alt = "Eagle in snowy land";
+			display.alt = e.target.title;
 		}
 	}
 
 	// 3. Add events
+	spans.forEach(span => {
+		span.addEventListener("click", imageDisplay);
+	})
 	
 	</script>
 </body>

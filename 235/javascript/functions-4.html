@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Functions-4</title>
+</head>
+
+<body>
+
+    <script>
+
+        // Both functions and variables that are declared using either 'let' or 'const', are SCOPED to the current BLOCK
+        // -> 'Block' -> Delimited by a pair of {} and used to group statements
+        // -> 'Scope' -> Where your variable is accessible and modifiable in your program
+        // *Outside the Block? -> Script Scope
+
+        // There are many GLOBALLY scoped objects - alerts, arrays, the Math Object, and so on
+        // Functions we created at the top level with the function keyword are also in the GLOBAL scope
+        // Our scripts have FULL access to these and other GLOBAL variables
+
+        // Variables declared with the var keyword are scoped to the NEAREST enclosing function 
+        // in which they were declared, they are NOT BLOCK SCOPED
+        // If a variable is declared with the var keyword OUTSIDE of a function, that variable is now in the GLOBAL scope
+
+        // ** Hoisting: Where variable and function declarations are conceptually 
+        //              moved to the TOP of their containing scope during the compilation phase
+        // ! var declarations are hoisted and initialized to undefined, while let and const declarations 
+        //   are hoisted but remain uninitialized, leading to the temporal dead zone and ReferenceError if accessed before declaration
+
+        "use strict";
+        // #1 - a & b here are in "script scope" because they are declared outside of a block
+        let A = "A";
+        let B = "B";
+
+
+        // #2 a function 
+        function func1() {
+            let A = "AA"; // A scoped to this function's block masks the "script scoped" A
+            console.log(`INSIDE func1() A equals ${A}`); // "AA"
+            console.log(`INSIDE func1() B equals ${B}`); // "B" - "script scoped" b is visible
+            B = "BB"; // change value of "script scoped" B
+            let C = "C"; // declare a block-scoped C variable
+            debugger; // debugger breakpoint
+        }
+
+        func1(); // call func1()
+        console.log(`OUTSIDE func1() A equals ${A}`); // "A" - A is in scope
+
+        console.log(`OUTSIDE func1() B equals ${B}`); // "BB" -  B is in scope
+
+        //console.log(`OUTSIDE func1() C equals ${C}`); // reference error! C is not defined
+
+        debugger; // debugger breakpoint
+
+    </script>
+</body>
+
+</html>

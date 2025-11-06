@@ -37,6 +37,13 @@ let greeting = formatGreeting("Mary");
 greeting = greeting.toUpperCase();
 console.log(greeting); 	// HELLO MARY!
 
+function greetFull(firstName, lastName) {
+	return "Hello " + firstName + " " + lastName + "!";
+}
+
+greeting = greetFull("Amy", "Lee");
+console.log(greeting);
+
 </script>
 </body>
 </html>

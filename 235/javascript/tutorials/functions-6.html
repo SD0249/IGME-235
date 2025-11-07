@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>Functions-6</title>
+</head>
+<body>
+
+<script>
+"use strict";
+// borrowed from: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Functions
+function addSquares(a, b) {
+  function square(x) {
+    return x * x;
+  }
+  return square(a) + square(b);
+}
+
+let a = addSquares(2, 3); // returns 13
+let b = addSquares(3, 4); // returns 25
+let c = addSquares(4, 5); // returns 41
+
+// Functions that are declared and defined with the 'function' keyword 
+// are available for use within their ENTIRE scope, 
+// even if code that calls them is PLACED BEFORE they have been declared
+doStuff();
+
+function doStuff() {
+    // Code here
+}
+
+// Function expressions declared with 'let'
+// Can not use before it is defined
+let doStuff = function () {
+
+}
+
+doStuff();
+
+// ** "TEMPORAL DEAD ZONE" 
+// : For variables declared with 'let' or 'const', there is a period 
+//   between entering scope and being declared where they cannot be accessed. 
+//   This period is known as the temporal dead zone. (TDZ)
+
+</script>
+</body>
+</html>

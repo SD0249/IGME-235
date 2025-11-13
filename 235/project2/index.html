@@ -3,17 +3,67 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Project 2</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Project 2_Web Service Application</title>
 
     <!-- Linking CSS and JS files-->
     <link rel="stylesheet" href="css/styles.css">
-    <script src="javascript/main.js"></script>
 </head>
-
-<body>
-    <h1>Project 2_Web Service Application</h1>
-</body>
-
 <!-- Structuring HTML document -->
+<body>
+    <header class="mainHeader">
+      <h1>Trivia Quest</h1>
+    </header>
 
+    <div class="container">
+        <header class="topbar">
+            <select id="category">
+            <option>Category</option>
+            </select>
+
+            <select id="difficulty">
+                <option value="">Any Difficulty</option>
+                <option value="easy">Easy</option>
+                <option value="medium">Medium</option>
+                <option value="hard">Hard</option>
+            </select>
+
+            <select id="questionType">
+                <option value="">Any Type</option>
+                <option value="multiple">Multiple Choice</option>
+                <option value="boolean">True / False</option>
+            </select>
+
+            <button id="startQuiz">Start Quiz</button>
+        </header>
+
+        <main class="quizArea">
+            <section class="questionDisplay">
+            <div id="questionText">Question text or image displayed here</div>
+            </section>
+
+            <section class="answers">
+                <!-- Place holder / will dynamically generate the  button in runtime -->
+                <button class="answerBtn">Option 1</button>
+                <button class="answerBtn">Option 2</button>
+                <button class="answerBtn">Option 3</button>
+                <button class="answerBtn">Option 4</button>
+            </section>
+        </main>
+
+        <!-- Optional Scoring System -->
+        <aside class="sidebar">
+            <h3>Score</h3>
+            <p id="scoreValue">0</p>
+            <small>Analytics can be added if time allows!</small>
+        </aside> 
+
+        <!-- Feedback & Score -->
+        <footer class="feedback">
+        <p id="feedbackText">Feedback & Score will appear here.</p>
+        </footer>
+    </div>
+    
+    <script src="javascript/main.js"></script>
+</body>
 </html>

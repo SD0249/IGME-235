@@ -1,0 +1,147 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+  background-color: #f9f9f9;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.container {
+  display: grid;
+  grid-template-areas:
+    "topbar topbar"
+    "quizArea sidebar"
+    "feedback feedback";
+  grid-template-columns: 2fr 1fr;
+  gap: 20px;
+  width: 90%;
+  max-width: 1000px;
+}
+
+.mainHeader {
+  text-align: center;
+  background-color: #4b6cb7;
+  background-image: linear-gradient(to right, #182848, #4b6cb7);
+  color: white;
+  padding: 20px 0;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 1000px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  margin-bottom: 20px;
+}
+
+.mainHeader h1 {
+  font-size: 2em;
+  letter-spacing: 1px;
+}
+
+.topbar {
+  grid-area: topbar;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ececec;
+  padding: 10px;
+  border-radius: 6px;
+}
+
+.topbar select,
+.topbar button {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1em;
+}
+
+.topBar button {
+  background-color: #4b6cb7;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.quizArea {
+  grid-area: quizArea;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.questionDisplay {
+  margin-bottom: 20px;
+}
+
+.answers {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: space-around;
+}
+
+.answerBtn {
+  flex: 1 1 calc(45%);
+  padding: 10px;
+  background-color: #e1e8ff;
+  border: 1px solid #aaa;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.answerBtn:hover {
+  background-color: #d0dbff;
+}
+
+.sidebar {
+  grid-area: sidebar;
+  background-color: #fafafa;
+  padding: 15px;
+  border-radius: 6px;
+  text-align: center;
+  border: 1px solid #ddd;
+}
+
+.feedback {
+  grid-area: feedback;
+  background-color: #ececec;
+  padding: 10px;
+  text-align: center;
+  border-radius: 6px;
+  margin-top: 10px;
+}
+
+/* Basic Responsiveness */
+@media (max-width: 768px) {
+  .container {
+    grid-template-areas:
+      "header"
+      "top-bar"
+      "quiz-area"
+      "sidebar"
+      "feedback";
+    grid-template-columns: 1fr;
+  }
+
+  .topbar {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .answers {
+    flex-direction: column;
+  }
+
+  .answerBtn {
+    flex: 1 1 100%;
+  }
+}

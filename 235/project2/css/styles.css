@@ -32,7 +32,6 @@ body {
   background-image: linear-gradient(to right, #182848, #4b6cb7);
   color: white;
   padding: 20px 0;
-  border-radius: 8px;
   width: 90%;
   max-width: 1000px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.2);
@@ -51,14 +50,12 @@ body {
   align-items: center;
   background-color: #ececec;
   padding: 10px;
-  border-radius: 6px;
 }
 
 .topbar select,
 .topbar button {
   padding: 8px 12px;
   border: 1px solid #ccc;
-  border-radius: 4px;
   font-size: 1em;
 }
 
@@ -73,7 +70,6 @@ body {
   grid-area: quizArea;
   background-color: #fff;
   padding: 20px;
-  border-radius: 6px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
@@ -93,7 +89,6 @@ body {
   padding: 10px;
   background-color: #e1e8ff;
   border: 1px solid #aaa;
-  border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.2s;
 }
@@ -106,7 +101,6 @@ body {
   grid-area: sidebar;
   background-color: #fafafa;
   padding: 15px;
-  border-radius: 6px;
   text-align: center;
   border: 1px solid #ddd;
 }
@@ -116,7 +110,6 @@ body {
   background-color: #ececec;
   padding: 10px;
   text-align: center;
-  border-radius: 6px;
   margin-top: 10px;
 }
 

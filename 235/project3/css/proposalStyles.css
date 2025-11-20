@@ -1,0 +1,177 @@
+/* --- VARIABLES & RESET --- */
+:root {
+    --color-primary: #007bff;
+    /* Bright Blue */
+    --color-secondary: #0056b3;
+    /* Darker Blue */
+    --color-background-light: #f8f9fa;
+    /* Light Gray */
+    --color-background-white: #ffffff;
+    --color-text: #343a40;
+    /* Dark Gray */
+    --color-border: #dee2e6;
+    --font-family-primary: 'Roboto Mono', monospace;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-family-primary);
+    line-height: 1.6;
+    color: var(--color-text);
+    background-color: var(--color-background-light);
+}
+
+/* --- HEADER --- */
+header {
+    background: var(--color-secondary);
+    color: var(--color-background-white);
+    padding: 2em 1em;
+    text-align: center;
+    border-bottom: 5px solid var(--color-primary);
+}
+
+header h1 {
+    font-size: 2.2em;
+    margin-bottom: 0.2em;
+    font-weight: 700;
+}
+
+header .tagline {
+    font-size: 1.1em;
+    opacity: 0.9;
+}
+
+/* --- GRID LAYOUT (The Core of Responsiveness) --- */
+.grid-container {
+    display: grid;
+    /* Default: 1 column for small screens */
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+@media (min-width: 992px) {
+    .grid-container {
+        /* Two columns: Main content (2 parts), Sidebar (1 part) */
+        grid-template-columns: 2fr 1fr;
+    }
+}
+
+/* --- GENERAL SECTION STYLING --- */
+section,
+aside section {
+    background-color: var(--color-background-white);
+    padding: 20px;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+h2 {
+    font-size: 1.6em;
+    color: var(--color-primary);
+    border-bottom: 2px solid var(--color-border);
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+h2 .fas {
+    margin-right: 10px;
+}
+
+h3 {
+    font-size: 1.2em;
+    color: var(--color-secondary);
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+/* --- SIDEBAR STYLING --- */
+.sidebar h4 {
+    color: var(--color-secondary);
+    margin-top: 10px;
+    font-weight: 700;
+}
+
+.sidebar .meta-item {
+    padding: 10px 0;
+    border-bottom: 1px dotted var(--color-border);
+}
+
+.sidebar ul,
+.sidebar ol {
+    padding-left: 20px;
+    margin-top: 5px;
+}
+
+/* --- LISTS & ICONS --- */
+ul,
+ol {
+    margin: 10px 0 10px 20px;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 5px;
+}
+
+li .fas {
+    color: var(--color-primary);
+    margin-right: 5px;
+}
+
+/* --- MOCKUP STYLING --- */
+.mockup-row {
+    display: flex;
+    flex-wrap: wrap;
+    /* Allows wrapping on smaller screens */
+    gap: 20px;
+    justify-content: space-between;
+}
+
+.mockup-item {
+    flex: 1 1 100%;
+    /* Default to full width */
+    margin-bottom: 15px;
+}
+
+@media (min-width: 600px) {
+    .mockup-item {
+        flex: 1 1 calc(50% - 10px);
+        /* Two items per row on medium screens */
+    }
+}
+
+.responsive-img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    border: 3px solid var(--color-secondary);
+    border-radius: 4px;
+}
+
+figcaption {
+    font-size: 0.9em;
+    text-align: center;
+    margin-top: 5px;
+    color: var(--color-text);
+}
+
+
+/* --- FOOTER --- */
+footer {
+    text-align: center;
+    padding: 1em 0;
+    background-color: var(--color-secondary);
+    color: var(--color-background-white);
+    font-size: 0.9em;
+    margin-top: 20px;
+}

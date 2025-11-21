@@ -19,38 +19,41 @@
 
     <div class="container">
         <header class="topbar">
-            <select id="category">
-                <option value="">Category</option>
-            </select>
+            <button id="toggleFilters" aria-expanded="false" aria-controls="filtersPanel">
+                Show Filters
+            </button>
 
-            <select id="difficulty">
-                <option value="">Any Difficulty</option>
-                <option value="easy">Easy</option>
-                <option value="medium">Medium</option>
-                <option value="hard">Hard</option>
-            </select>
+            <div id="filtersPanel" class="filtersPanel" hidden>
+                <label for="category">Category:</label>
+                <select id="category">
+                    <option value="">Any Category</option>
+                </select>
 
-            <select id="questionType">
-                <option value="">Any Type</option>
-                <option value="multiple">Multiple Choice</option>
-                <option value="boolean">True / False</option>
-            </select>
+                <label for="difficulty">Difficulty:</label>
+                <select id="difficulty">
+                    <option value="">Any Difficulty</option>
+                    <option value="easy">Easy</option>
+                    <option value="medium">Medium</option>
+                    <option value="hard">Hard</option>
+                </select>
+
+                <label for="questionType">Type:</label>
+                <select id="questionType">
+                    <option value="">Any Type</option>
+                    <option value="multiple">Multiple Choice</option>
+                    <option value="boolean">True / False</option>
+                </select>
+            </div>
 
             <button id="startQuiz">Start Quiz</button>
         </header>
 
         <main class="quizArea">
             <section class="questionDisplay">
-                <div id="questionText">Question text or image displayed here</div>
+                <div id="questionText">Click 'Start Quiz' to begin. Your previous preference will be saved.</div>
             </section>
 
-            <section class="answers">
-                <!-- Place holder / will dynamically generate the  button in runtime -->
-                <button class="answerBtn">Option 1</button>
-                <button class="answerBtn">Option 2</button>
-                <button class="answerBtn">Option 3</button>
-                <button class="answerBtn">Option 4</button>
-            </section>
+            <section class="answers"><!-- will dynamically generate the  button in runtime --></section>
         </main>
 
         <!-- Optional Scoring System -->
@@ -62,7 +65,8 @@
 
         <!-- Feedback & Score -->
         <footer class="feedback">
-            <p id="feedbackText">Feedback & Score will appear here.</p>
+            <p id="feedbackText">Waiting for quiz...</p>
+            <img id="loadingSpinner" class="hidden" src="media/spinner.gif" alt="Loading...">
         </footer>
     </div>
 

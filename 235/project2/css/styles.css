@@ -113,21 +113,116 @@ body {
   margin-top: 10px;
 }
 
-/* Basic Responsiveness */
+.hidden {
+  display: none !important;
+}
+
+#loadingSpinner {
+  width: 45px;
+  height: 45px;
+  display: block;
+  margin: 10px auto;
+}
+
+/* When full screen nav bar should be expanded */
+.filtersPanel {
+  display: flex !important;
+  flex-direction: row;
+  gap: 10px;
+}
+
+@media (min-width: 769px) {
+  #toggleFilters {
+    display: none;
+  }
+}
+
+/* Responsiveness */
 @media (max-width: 768px) {
+
   .container {
+    display: grid;
     grid-template-areas:
-      "header"
-      "top-bar"
-      "quiz-area"
+      "topbar"
+      "quizArea"
       "sidebar"
       "feedback";
     grid-template-columns: 1fr;
+    width: 100%;
+    max-width: 100%;
+    gap: 15px;
+  }
+
+  #toggleFilters {
+    background-color: #4b6cb7;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 1em;
+    cursor: pointer;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    width: 100%;
+    text-align: left;
+  }
+
+  .filtersPanel {
+    display: none;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 15px;
+  }
+
+  .filtersPanel[aria-expanded="true"],
+  .filtersPanel.show {
+    display: flex;
+  }
+
+  .filtersPanel select {
+    width: 100%;
   }
 
   .topbar {
+    grid-area: topbar;
     flex-direction: column;
-    gap: 10px;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 15px;
+  }
+
+  .topbar label {
+    margin-bottom: 4px;
+    font-weight: 600;
+    font-size: 0.9em;
+  }
+
+  .topbar select,
+  .topbar button {
+    width: 100%;
+    max-width: 320px;
+    padding: 6px 10px;
+    font-size: 0.95em;
+    border-radius: 4px;
+  }
+
+  .topbar button {
+    max-width: none;
+    cursor: pointer;
+  }
+
+  .quizArea {
+    grid-area: quizArea;
+    width: 100%;
+  }
+
+  .sidebar {
+    grid-area: sidebar;
+    width: 100%;
+  }
+
+  .feedback {
+    grid-area: feedback;
+    width: 100%;
   }
 
   .answers {
@@ -135,6 +230,7 @@ body {
   }
 
   .answerBtn {
-    flex: 1 1 100%;
+    width: 100%;
+    flex: none;
   }
 }

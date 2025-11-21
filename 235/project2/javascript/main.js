@@ -12,6 +12,13 @@ let questions = [];
 let currentQuestionIndex = 0;
 let score = 0;
 
+// Setting up the page - Asynchronous Functions to handle operations and their sequential execution
+async function SetUp() {
+  await loadCategories();
+  await loadSavedSettings();
+}
+
+// Adds category options to the drop down to display
 async function loadCategories() {
   const resource = await fetch("https://opentdb.com/api_category.php");
   const data = await resource.json();
@@ -23,10 +30,29 @@ async function loadCategories() {
   });
 }
 
+// Loads previous user preference fetched from the local storage if there is one
+async function loadSavedSettings() {
+  // Will return null if there isn't any
+  const savedCategory = localStorage.getItem("previousCategory");
+  const savedDifficulty = localStorage.getItem("previousDifficulty");
+  const savedType = localStorage.getItem("previousType");
+
+  // If there is a value display
+  if (savedCategory) categorySelect.value = savedCategory;
+  if (savedDifficulty) difficultySelect.value = savedDifficulty;
+  if (savedType) typeSelect.value = savedType;
+}
+
+// When clicking the start button, fetch the questions and load the first one
 startButton.addEventListener("click", async () => {
   const category = categorySelect.value;
   const difficulty = difficultySelect.value;
   const type = typeSelect.value;
+
+  // Save last searched user preferences when user clicks start
+  localStorage.setItem("previousCategory", category);
+  localStorage.setItem("previousDifficulty", difficulty);
+  localStorage.setItem("previousType", type);
 
   // Fetch questions
   const url = `https://opentdb.com/api.php?amount=10&category=${category}&difficulty=${difficulty}&type=${type}`;
@@ -45,10 +71,12 @@ startButton.addEventListener("click", async () => {
   showQuestion();
 });
 
+// Show the question on the screen with its elements
 function showQuestion() {
   const q = questions[currentQuestionIndex];
   questionText.innerHTML = decodeHTML(q.question);
 
+  // *... is a spread operator
   const answers = [...q.incorrect_answers, q.correct_answer];
   shuffleArray(answers);
 
@@ -65,6 +93,7 @@ function showQuestion() {
   });
 }
 
+// Check whether if player clicked the correct answer
 function checkAnswer(selected, correct) {
   const decodedSelected = decodeHTML(selected);
   const decodedCorrect = decodeHTML(correct);
@@ -77,12 +106,13 @@ function checkAnswer(selected, correct) {
     feedbackText.textContent = "Correct!";
     score++;
     scoreValue.textContent = score;
-  } 
+  }
   else {
     feedbackText.textContent = `Wrong! Correct answer: ${decodedCorrect}`;
     scoreValue.textContent = score;
-  } 
+  }
 
+  // Go over to the next question after player clicks the right or wrong answer
   setTimeout(() => {
     currentQuestionIndex++;
     if (currentQuestionIndex < questions.length) {
@@ -95,24 +125,29 @@ function checkAnswer(selected, correct) {
 
 }
 
+// Finish Quiz - no more questions to display
 function endQuiz() {
   questionText.textContent = "Quiz complete!";
   answersContainer.innerHTML = "";
   feedbackText.textContent = `Final Score: ${score}`;
 }
 
+// Returns the text value containing the content related to the current html object
 function decodeHTML(html) {
   const txt = document.createElement("textArea");
   txt.innerHTML = html;
   return txt.value;
 }
 
+// Shuffles the elements of an array in place using Fisher-Yates shuffle
 function shuffleArray(array) {
   for (let i = array.length - 1; i > 0; i--) {
+    // Multiply a random decimal number >= 0 and < 1, 
+    // and multiplying by (i+1) scales the random number into range
     const j = Math.floor(Math.random() * (i + 1));
     [array[i], array[j]] = [array[j], array[i]];
   }
 }
 
-// Initializing and Calling the loadCatergories for set up
-loadCategories();
+// Setting up page
+SetUp();

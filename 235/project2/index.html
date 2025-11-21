@@ -9,16 +9,18 @@
     <!-- Linking CSS and JS files-->
     <link rel="stylesheet" href="css/styles.css">
 </head>
+
 <!-- Structuring HTML document -->
+
 <body>
     <header class="mainHeader">
-      <h1>Trivia Quest</h1>
+        <h1>Trivia Quest</h1>
     </header>
 
     <div class="container">
         <header class="topbar">
             <select id="category">
-            <option>Category</option>
+                <option value="">Category</option>
             </select>
 
             <select id="difficulty">
@@ -39,7 +41,7 @@
 
         <main class="quizArea">
             <section class="questionDisplay">
-            <div id="questionText">Question text or image displayed here</div>
+                <div id="questionText">Question text or image displayed here</div>
             </section>
 
             <section class="answers">
@@ -56,14 +58,15 @@
             <h3>Score</h3>
             <p id="scoreValue">0</p>
             <small>Analytics can be added if time allows!</small>
-        </aside> 
+        </aside>
 
         <!-- Feedback & Score -->
         <footer class="feedback">
-        <p id="feedbackText">Feedback & Score will appear here.</p>
+            <p id="feedbackText">Feedback & Score will appear here.</p>
         </footer>
     </div>
-    
+
     <script src="javascript/main.js"></script>
 </body>
+
 </html>

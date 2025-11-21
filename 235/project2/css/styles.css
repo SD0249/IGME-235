@@ -34,7 +34,7 @@ body {
   padding: 20px 0;
   width: 90%;
   max-width: 1000px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   margin-bottom: 20px;
 }
 
@@ -59,7 +59,7 @@ body {
   font-size: 1em;
 }
 
-.topBar button {
+.topbar button {
   background-color: #4b6cb7;
   color: white;
   cursor: pointer;
@@ -70,7 +70,7 @@ body {
   grid-area: quizArea;
   background-color: #fff;
   padding: 20px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .questionDisplay {

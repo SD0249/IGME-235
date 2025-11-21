@@ -6,22 +6,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Project Proposal: Refactor</title>
     <link rel="stylesheet" href="css/proposalStyles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 
 <body>
     <header>
-        <h1><i class="fas fa-cube"></i> Refactor: A 2D Linear Transformation Visualizer</h1>
-        <p class="tagline">Bridging the gap between abstract numbers and geometric reality.</p>
+        <h1><i class="fas fa-cube"></i> Refactor :</h1>
+        <h1>A 2D Linear Transformation Visualizer</h1>
     </header>
 
     <main class="grid-container">
         <section class="main-content">
             <section id="high-concept">
                 <h2><i class="fas fa-lightbulb"></i> High Concept</h2>
-                <p><strong>Refactor</strong> is a focused, single-screen interactive tool designed to demystify
-                    2D linear algebra. Users directly manipulate the elements of a 3 X 3 Affine Matrix and
+                <p><strong>Refactor</strong> is a focused, single-screen <strong>interactive tool</strong> designed to demystify
+                    2D linear algebra. Users directly manipulate the elements of a <strong>3 X 3 Affine Matrix</strong> and
                     instantly observe the resulting scaling, rotation, shearing, and translation of geometric
                     shapes, bridging the gap between abstract numbers and geometric reality.</p>
             </section>
@@ -33,26 +33,26 @@
 
                 <h3>Core Mechanics - Minimum Viable Product</h3>
                 <ul>
-                    <li>Real-Time Transformation: The user manipulates inputs in the Control Panel to modify
+                    <li><strong>Real-Time Transformation</strong>: The user manipulates inputs in the Control Panel to modify
                         the 3 X 3 Affine Matrix. The object's scaling, rotation, shearing, and translation
                         updates immediately.</li>
-                    <li>Determinant Display: The numerical Determinant of the 2 X 2
+                    <li><strong>Determinant Display</strong>: The numerical Determinant of the 2 X 2
                         sub-matrix is constantly displayed, visually explained as the area scaling factor.</li>
-                    <li>Custom Shapes: Users can choose from a small selection of shapes (e.g., Triangle, House) to
+                    <li><strong>Custom Shapes</strong>: Users can choose from a small selection of shapes (e.g., Triangle, House) to
                         apply transformations to.</li>
-                    <li>History Stack: Implementation of a History Stack with "Undo" and "Redo" buttons,
+                    <li><strong>History Stack</strong>: Implementation of a History Stack with "Undo" and "Redo" buttons,
                         allowing users to move backward and forward through their sequence of concatenated
                         transformations for deeper analysis.</li>
                 </ul>
 
                 <h3>High-Impact Stretch Features</h3>
                 <ul>
-                    <li><i class="fas fa-location-arrow"></i> Visual Tracing: An option to leave a faded, ghosted
+                    <li><i class="fas fa-location-arrow"></i><strong>Visual Tracing</strong>: An option to leave a faded, ghosted
                         trail of the previous transformation state, illustrating the path the shape took.</li>
-                    <li><i class="fas fa-arrows-alt"></i> Change of Basis Mode: A separate mode allowing users to
+                    <li><i class="fas fa-arrows-alt"></i><strong>Change of Basis Mode</strong>: A separate mode allowing users to
                         define a new basis by dragging the i and j vectors. Transformations are
                         then visualized relative to this new coordinate system.</li>
-                    <li><i class="fas fa-question-circle"></i> Quiz System: Simple, pop-up challenges (e.g., "Rotate
+                    <li><i class="fas fa-question-circle"></i><strong>Quiz System</strong>: Simple, pop-up challenges (e.g., "Rotate
                         the shape 180 degrees") where the system validates the user's matrix input and provides fun,
                         positive feedback ("Awesome!", "Fabulous!") upon success.</li>
                 </ul>
@@ -82,12 +82,12 @@
 
                 <div class="meta-item">
                     <h4>Genre</h4>
-                    <p>Education, Interactive Tool, Data Visualization, Simulation.</p>
+                    <p>Education, Interactive Tool, Data Visualization, Simulation</p>
                 </div>
 
                 <div class="meta-item">
                     <h4>Platform</h4>
-                    <p>Desktop Web (Optimized for Chrome).</p>
+                    <p>Desktop Web (Optimized for Chrome)</p>
                 </div>
 
                 <div class="meta-item">
@@ -100,11 +100,11 @@
                 <h2><i class="fas fa-palette"></i> Aesthetics</h2>
                 <p>The aesthetic will be Minimalist, Geometric, and Scientific.</p>
                 <ul>
-                    <li>Color Palette: White/light gray background with contrasting dark lines. Key elements
+                    <li><strong>Color Palette</strong>: White/light gray background with contrasting dark lines. Key elements
                         (vectors, shape) use bright, distinct colors (Red/Blue/Green).</li>
-                    <li>Typography: Clean, geometric sans-serif (Roboto Mono) for a professional, technical feel.
+                    <li><strong>Typography</strong>: Montserrat(Clean Sans-Serif) for a professional, technical feel.
                     </li>
-                    <li>Visuals: PixiJS rendering for sharp, performant vector-like visuals and a clear Cartesian
+                    <li><strong>Visuals</strong>: PixiJS rendering for sharp, performant vector-like visuals and a clear Cartesian
                         grid.</li>
                 </ul>
             </section>
@@ -115,19 +115,22 @@
                     built with DOM elements and CSS.</p>
                 <h4>ES6 Class Implementation:</h4>
                 <ol>
-                    <li>`AffineMatrix2D` (3 X 3 math, including `inverse()` for advanced features).</li>
-                    <li>`Vector2D` (Dedicated class for vector operations).</li>
-                    <li>`GUIManager` (Manages DOM interactions and ensures Separation of Concerns).</li>
+                    <li><strong>AffineMatrix2D</strong> - 3 X 3 math, including `inverse()` for advanced features</li>
+                    <li><strong>Vector2D</strong> - Dedicated class for vector operations</li>
+                    <li><strong>GUIManager</strong> - Manages DOM interactions and ensures Separation of Concerns</li>
                 </ol>
             </section>
 
             <section id="developer">
                 <h2><i class="fas fa-user-circle"></i> About the Developer</h2>
                 <p>
-                    Amy Lee, Game Design and Development BS, 2nd
+                    Name: Amy Lee
                 </p>
                 <p>
-                    Rewrite.
+                    Major/Minor/Year: Game Design and Development, Mathematics, May 2028
+                </p>
+                <p>
+                    Skill Set/Interests: My primary interests lie in creating rich experience games can provide to users with realistic simulation. Linear Algebra is fundamental for computer graphics, and when I was learning the subject, I thought it would be nice to have a visual tool to assist learning. I have experience with JavaScript fundamentals and am focusing on developing more skills with PixiJS and making a helpful user experience with the tool.
                 </p>
             </section>
         </aside>

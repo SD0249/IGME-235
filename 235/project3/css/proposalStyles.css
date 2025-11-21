@@ -1,16 +1,14 @@
 /* --- VARIABLES & RESET --- */
 :root {
-    --color-primary: #007bff;
-    /* Bright Blue */
-    --color-secondary: #0056b3;
-    /* Darker Blue */
-    --color-background-light: #f8f9fa;
-    /* Light Gray */
+    /* Updated Font Family */
+    --font-family-primary: 'Montserrat', sans-serif;
+    
+    --color-primary: #1e88e5; /* Medium Bright Blue (Strong Accent) */
+    --color-secondary: #0d47a1; /* Deep Navy Blue (Headers/Background) */
+    --color-background-light: #fdfdfe; /* Nearly White */
     --color-background-white: #ffffff;
-    --color-text: #343a40;
-    /* Dark Gray */
-    --color-border: #dee2e6;
-    --font-family-primary: 'Roboto Mono', monospace;
+    --color-text: #2c3e50; /* Darker, more professional text color */
+    --color-border: #e0e0e0;
 }
 
 * {
@@ -21,7 +19,7 @@
 
 body {
     font-family: var(--font-family-primary);
-    line-height: 1.6;
+    line-height: 1.6; /* Slightly adjusted line-height for Montserrat */
     color: var(--color-text);
     background-color: var(--color-background-light);
 }
@@ -30,68 +28,72 @@ body {
 header {
     background: var(--color-secondary);
     color: var(--color-background-white);
-    padding: 2em 1em;
+    padding: 3em 1em; 
     text-align: center;
-    border-bottom: 5px solid var(--color-primary);
+    border-bottom: 7px solid var(--color-primary); 
+    margin-bottom: 20px;
 }
 
 header h1 {
-    font-size: 2.2em;
-    margin-bottom: 0.2em;
+    font-size: 2.6em; 
+    margin-bottom: 0.1em;
     font-weight: 700;
 }
 
 header .tagline {
-    font-size: 1.1em;
+    font-size: 1.2em;
     opacity: 0.9;
 }
 
-/* --- GRID LAYOUT (The Core of Responsiveness) --- */
+/* --- GRID LAYOUT --- */
 .grid-container {
     display: grid;
-    /* Default: 1 column for small screens */
     grid-template-columns: 1fr;
-    gap: 20px;
+    gap: 30px; 
     padding: 20px;
-    max-width: 1200px;
+    max-width: 1300px; 
     margin: 0 auto;
 }
 
 @media (min-width: 992px) {
     .grid-container {
-        /* Two columns: Main content (2 parts), Sidebar (1 part) */
-        grid-template-columns: 2fr 1fr;
+        grid-template-columns: 2.5fr 1.5fr; 
     }
 }
 
 /* --- GENERAL SECTION STYLING --- */
-section,
-aside section {
+section, aside section {
     background-color: var(--color-background-white);
-    padding: 20px;
+    padding: 25px; 
     border: 1px solid var(--color-border);
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    border-radius: 10px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08); 
+    margin-bottom: 20px;
 }
 
 h2 {
-    font-size: 1.6em;
+    font-size: 1.7em;
     color: var(--color-primary);
-    border-bottom: 2px solid var(--color-border);
-    padding-bottom: 10px;
-    margin-bottom: 15px;
+    border-bottom: 3px solid var(--color-border);
+    padding-bottom: 12px;
+    margin-bottom: 20px; 
     font-weight: 700;
 }
 
 h2 .fas {
-    margin-right: 10px;
+    margin-right: 12px;
 }
 
 h3 {
-    font-size: 1.2em;
+    font-size: 1.3em;
     color: var(--color-secondary);
-    margin-top: 15px;
-    margin-bottom: 10px;
+    margin-top: 25px;
+    margin-bottom: 15px;
+}
+
+p {
+    margin-bottom: 1.5em; /* Increased vertical space between paragraphs */
+    text-align: left; /* Changed from justify to left for better spacing control with Montserrat */
 }
 
 /* --- SIDEBAR STYLING --- */
@@ -99,79 +101,83 @@ h3 {
     color: var(--color-secondary);
     margin-top: 10px;
     font-weight: 700;
+    font-size: 1em;
 }
 
 .sidebar .meta-item {
-    padding: 10px 0;
-    border-bottom: 1px dotted var(--color-border);
+    padding: 12px 0;
+    border-bottom: 1px dashed var(--color-border);
 }
 
-.sidebar ul,
-.sidebar ol {
-    padding-left: 20px;
-    margin-top: 5px;
+.sidebar .meta-item:last-child {
+    border-bottom: none;
 }
+
 
 /* --- LISTS & ICONS --- */
-ul,
-ol {
-    margin: 10px 0 10px 20px;
-    padding: 0;
+ul, ol {
+    margin: 15px 0 15px 0;
+    padding-left: 20px;
 }
 
 li {
-    margin-bottom: 5px;
+    margin-bottom: 10px; 
 }
 
 li .fas {
-    color: var(--color-primary);
-    margin-right: 5px;
+    color: var(--color-secondary);
+    margin-right: 8px;
 }
 
-/* --- MOCKUP STYLING --- */
+/* --- MOCKUP STYLING (Forcing single column and centering) --- */
+#mockups {
+    text-align: center; /* Center the overall section content */
+}
+
 .mockup-row {
     display: flex;
-    flex-wrap: wrap;
-    /* Allows wrapping on smaller screens */
-    gap: 20px;
-    justify-content: space-between;
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Center items horizontally within the flex container */
+    gap: 40px; /* Increased space between Mockup 1 and Mockup 2 */
+    margin: 30px 0;
 }
 
 .mockup-item {
-    flex: 1 1 100%;
-    /* Default to full width */
-    margin-bottom: 15px;
-}
-
-@media (min-width: 600px) {
-    .mockup-item {
-        flex: 1 1 calc(50% - 10px);
-        /* Two items per row on medium screens */
-    }
+    max-width: 550px; /* Limit the width of individual mockups */
+    width: 100%;
+    margin-bottom: 0; /* Remove unnecessary bottom margin */
 }
 
 .responsive-img {
     max-width: 100%;
     height: auto;
     display: block;
-    border: 3px solid var(--color-secondary);
-    border-radius: 4px;
+    border: 3px solid var(--color-primary);
+    border-radius: 6px;
+    margin: 0 auto; /* Ensures image itself is centered */
 }
 
 figcaption {
     font-size: 0.9em;
     text-align: center;
-    margin-top: 5px;
+    margin-top: 15px; /* Increased space between image and caption */
     color: var(--color-text);
+    font-style: italic;
+    max-width: 90%;
+    margin: 15px auto 0 auto;
 }
 
 
 /* --- FOOTER --- */
 footer {
-    text-align: center;
-    padding: 1em 0;
+    text-align: center; 
+    padding: 1.5em 0;
     background-color: var(--color-secondary);
     color: var(--color-background-white);
     font-size: 0.9em;
-    margin-top: 20px;
+    margin-top: 30px;
+}
+
+footer p {
+    text-align: center;
 }

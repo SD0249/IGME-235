@@ -1,10 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <title>Project 2 Documentation</title>
-    </head>
-    <body>
-        
-    </body>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project 2 Documentation</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+    <header class="mainHeader">
+        <h1>Trivia Quest - Documentation</h1>
+    </header>
+
+    <main class="docContainer">
+        <section>
+            <h2>Project Overview</h2>
+            <p>
+                Trivia Quest is a web-based quiz application that fetches questions dynamically from the OpenTrivia
+                Database API.
+                Users can filter questions by category, difficulty, and type. The application tracks scores and
+                performance metrics,
+                including time taken per correct question and average times by category.
+            </p>
+        </section>
+
+        <section>
+            <h2>Development Process</h2>
+            <ol>
+                <li>Planned structure and UI layout using HTML5 semantic elements and CSS Grid/Flexbox</li>
+                <li>Integrated OpenTrivia API using fetch(), handled errors like 429, displayed information returned
+                </li>
+                <li>Implemented local storage for saving user preferences and average time taken by each category</li>
+                <li>Added timer for questions, score tracking, and strongest/weakest category display based on average
+                    time of each category</li>
+                <li>Tested responsiveness on mobile sizes</li>
+            </ol>
+        </section>
+
+        <section>
+            <h2>Resources and Tutorials</h2>
+            <ul>
+                <li><a href="https://opentdb.com/api_config.php">OpenTrivia Database API Documentation</a></li>
+                <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API">MDN Fetch API</a></li>
+                <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage">MDN Web Storage
+                        API</a></li>
+                <li><a href="https://css-tricks.com/snippets/css/a-guide-to-flexbox/">CSS Flexbox Guide</a></li>
+                <li>ChatGPT:
+                    <p>
+                        After getting feedback in class and after submitting a proposal for Project 3, I asked
+                        ChatGPT to access my prototype based off from the rubric, and I think this vastly increased my
+                        workflow because I got a better idea of what I should improve.
+                    </p>
+                </li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Extra Effort</h2>
+            <ul>
+                <li>Timers for each question and display of elapsed time for self-assessment.</li>
+                <li>Calculation of average response times and saved in local storage</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Citations</h2>
+            <ul>
+                <li>Spinner GIF: From GIF Finder Homework image resource
+                </li>
+                <li>OpenTrivia API (https://opentdb.com): Question Resources</li>
+            </ul>
+
+        </section>
+
+        <section>
+            <h2>Self-Assessment</h2>
+            <p>
+                Based on the rubric, I believe this project meets the functional, and code quality requirements, but
+                weak in design to some degree.
+                I would grade this project as <strong>A-B</strong>.
+            </p>
+        </section>
+    </main>
+
+    <div class="documentLink">
+        <a href="index.html">Back to Project</a>
+    </div>
+</body>
+
 </html>

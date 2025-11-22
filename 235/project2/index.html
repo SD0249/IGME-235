@@ -18,27 +18,28 @@
     </header>
 
     <div class="container">
-        <header class="topbar">
-            <button id="toggleFilters" aria-expanded="false" aria-controls="filtersPanel">
-                Show Filters
-            </button>
+        <nav class="topbar">
 
-            <div id="filtersPanel" class="filtersPanel" hidden>
+            <div class="controlGroup">
                 <label for="category">Category:</label>
-                <select id="category">
+                <select id="category" title="Choose the topic of Trivia!">
                     <option value="">Any Category</option>
                 </select>
+            </div>
 
+            <div class="controlGroup">
                 <label for="difficulty">Difficulty:</label>
-                <select id="difficulty">
+                <select id="difficulty" title="Choose how challenging the questions will be!">
                     <option value="">Any Difficulty</option>
                     <option value="easy">Easy</option>
                     <option value="medium">Medium</option>
                     <option value="hard">Hard</option>
                 </select>
+            </div>
 
+            <div class="controlGroup">
                 <label for="questionType">Type:</label>
-                <select id="questionType">
+                <select id="questionType" title="Choose between Multiple choice and T/F!">
                     <option value="">Any Type</option>
                     <option value="multiple">Multiple Choice</option>
                     <option value="boolean">True / False</option>
@@ -46,7 +47,7 @@
             </div>
 
             <button id="startQuiz">Start Quiz</button>
-        </header>
+        </nav>
 
         <main class="quizArea">
             <section class="questionDisplay">
@@ -60,7 +61,10 @@
         <aside class="sidebar">
             <h3>Score</h3>
             <p id="scoreValue">0</p>
-            <small>Analytics can be added if time allows!</small>
+
+            <h3>Performance</h3>
+            <p><strong>Strongest:</strong> <span id="strongestCategory">N/A</span></p>
+            <p><strong>Weakest:</strong> <span id="weakestCategory">N/A</span></p>
         </aside>
 
         <!-- Feedback & Score -->
@@ -68,6 +72,11 @@
             <p id="feedbackText">Waiting for quiz...</p>
             <img id="loadingSpinner" class="hidden" src="media/spinner.gif" alt="Loading...">
         </footer>
+    </div>
+
+    <!-- Link to document -->
+    <div class="documentLink">
+        <a href="doc.html">Project Documentation</a>
     </div>
 
     <script src="javascript/main.js"></script>

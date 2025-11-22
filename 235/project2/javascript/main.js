@@ -1,15 +1,19 @@
-const toggleButton = document.getElementById("toggleFilters");
-const filtersPanel = document.getElementById("filtersPanel");
+const categorySelect = document.querySelector("#category");
+const difficultySelect = document.querySelector("#difficulty");
+const typeSelect = document.querySelector("#questionType");
+const startButton = document.querySelector("#startQuiz");
 
-const categorySelect = document.getElementById("category");
-const difficultySelect = document.getElementById("difficulty");
-const typeSelect = document.getElementById("questionType");
-const startButton = document.getElementById("startQuiz");
-
-const questionText = document.getElementById("questionText");
+const questionText = document.querySelector("#questionText");
 const answersContainer = document.querySelector(".answers");
-const feedbackText = document.getElementById("feedbackText");
-const scoreValue = document.getElementById("scoreValue");
+const feedbackText = document.querySelector("#feedbackText");
+const scoreValue = document.querySelector("#scoreValue");
+
+const loadingSpinner = document.querySelector("#loadingSpinner");
+
+let timer = null;
+let timeElapsed = 0;  // Resets every question
+let times = [];
+let categoryTimeStats = JSON.parse(localStorage.getItem("categoryTimeStats")) || {};
 
 let questions = [];
 let currentQuestionIndex = 0;
@@ -19,6 +23,7 @@ let score = 0;
 async function SetUp() {
   await loadCategories();
   await loadSavedSettings();
+  await updateStrengthDisplay();
 }
 
 // Adds category options to the drop down to display
@@ -60,21 +65,6 @@ function clearLoadingState(message = "") {
   startButton.disabled = false;
 }
 
-// Clicking the toggle button expands the menu
-toggleBtn.addEventListener("click", () => {
-  const isHidden = filtersPanel.hasAttribute("hidden");
-
-  if (isHidden) {
-    filtersPanel.removeAttribute("hidden");
-    toggleBtn.setAttribute("aria-expanded", "true");
-    toggleBtn.textContent = "Hide Filters ▲";
-  } else {
-    filtersPanel.setAttribute("hidden", "");
-    toggleBtn.setAttribute("aria-expanded", "false");
-    toggleBtn.textContent = "Show Filters ▼";
-  }
-});
-
 // When clicking the start button, fetch the questions and load the first one
 startButton.addEventListener("click", async () => {
   const category = categorySelect.value;
@@ -94,18 +84,47 @@ startButton.addEventListener("click", async () => {
 
   // Loading State shown after selection confirmed
   showLoadingState("Fetching questions...");
-
-  // Fetch questions
   const url = `https://opentdb.com/api.php?amount=10${category ? `&category=${category}` : ""}${difficulty ? `&difficulty=${difficulty}` : ""}${type ? `&type=${type}` : ""}`;
-  const resource = await fetch(url);
-  const data = await resource.json();
 
+  // Fetch questions -
+  // When there are too many requests in a short amount of time, the browser throws 429 error
+  // Solution -> Wrap it in Try/Catch and Check HTTP status!
+  try {
+    const resource = await fetch(url);
+
+    // Detect 429 or server errors
+    if (!resource.ok) {
+      if (resource.status === 429) {
+        clearLoadingState("You are sending too many requests! Please wait a moment.");
+      } else {
+        clearLoadingState(`Server Error. Try again later. Detail: ${resource.status}`);
+      }
+      return;
+    }
+
+    // At this point, resource was successfully fetched!
+    const data = await resource.json();
+
+    // If OpenTrivia Database has returned a response_code of 5
+    if (data.response_code === 5) {
+      clearLoadingState("Too many requests! Please slow down.");
+      return;
+    }
+
+    // Questions were returned, proceed
+    questions = data.results;
+
+  } catch (error) {
+    // Catch only runs for Network failure - No HTTP Response could be established at all.
+    clearLoadingState("Network error. Please check your connection.");
+    console.error("Fetch error:", error);
+  }
+
+  // ** At this point, it means the response from trivia base was also good!
   // Clear the loading state after all of the questions are retrieved - it is too quick to even see it,
   // so I decided to add a setTimeout function for better visabiltiy
   // clearLoadingState("");
   setTimeout(() => clearLoadingState(""), 200);
-
-  questions = data.results;
 
   if (questions.length === 0) {
     questionText.textContent = "No questions found for the selected options!";
@@ -127,8 +146,21 @@ function showQuestion() {
   questionText.innerHTML = decodeHTML(q.question);
 
   // *... is a spread operator
-  const answers = [...q.incorrect_answers, q.correct_answer];
-  shuffleArray(answers);
+  let answers = [...q.incorrect_answers, q.correct_answer];
+
+  // Only shuffle the answers when it is a multiple choice question
+  if (q.type.toLowerCase() === "multiple" && answers.length > 2) {
+    shuffleArray(answers);
+  }
+  // Enforce not shuffled values for T/F questions
+  else if (q.type === "boolean") {
+    answers = ["True", "False"];
+
+    // Swap if correct answer is false 
+    if (!answers.includes(q.correct_answer)) {
+      answers = [q.correct_answer, answers.find(a => a !== q.correct_answer)];
+    }
+  }
 
   // Clear previous answers displayed
   answersContainer.innerHTML = "";
@@ -143,10 +175,32 @@ function showQuestion() {
   });
 
   feedbackText.textContent = `Question ${currentQuestionIndex + 1} of ${questions.length}`;
+
+  startTimer();
+}
+
+// Set interval of timer to 1s
+function startTimer() {
+  if (timer) clearInterval(timer);  // reset if needed
+  timeElapsed = 0;
+
+  // Update timer every second
+  timer = setInterval(() => {
+    timeElapsed++;
+    updateTimerDisplay();
+  }, 1000);
+}
+
+// Show elapsed time each second
+function updateTimerDisplay() {
+  feedbackText.textContent = `Time: ${timeElapsed}s | Question ${currentQuestionIndex + 1} of ${questions.length}`;
 }
 
 // Check whether if player clicked the correct answer
 function checkAnswer(selected, correct) {
+  // STOP Timing IMMEDIATELY!!
+  clearInterval(timer);
+
   const decodedSelected = decodeHTML(selected);
   const decodedCorrect = decodeHTML(correct);
 
@@ -156,9 +210,10 @@ function checkAnswer(selected, correct) {
 
   // Reward user or give them feedback
   if (decodedSelected === decodedCorrect) {
-    feedbackText.textContent = "Correct!";
+    feedbackText.textContent = `Correct! You answered in ${timeElapsed}s!`;
     score++;
     scoreValue.textContent = score;
+    times.push(timeElapsed);
   }
   else {
     feedbackText.textContent = `Wrong! Correct answer: ${decodedCorrect}`;
@@ -182,12 +237,68 @@ function checkAnswer(selected, correct) {
 function endQuiz() {
   questionText.textContent = "Quiz complete! Test your knowledge on other catergories too!";
   answersContainer.innerHTML = "";
-  feedbackText.textContent = `Final Score: ${score}`;
+
+  // Reset timer related values
+  clearInterval(timer);
+  timer = null;
+
+  // Show average time on this subject
+  const average = (times.reduce((a, b) => a + b, 0) / times.length).toFixed(1);
+  feedbackText.textContent = `Final Score: ${score} - Average Time: ${average}`;
+
+  // Store the average time for this category in local storage
+  updateCategoryStats();
+}
+
+// Updates the value of the average solving time taken for this category
+function updateCategoryStats() {
+  const category = categorySelect.options[categorySelect.selectedIndex].textContent;
+
+  if (!categoryTimeStats[category]) {
+    categoryTimeStats[category] = { totalTime: 0, totalQuestions: 0 };
+  }
+
+  // Add this quiz session's run time
+  const totalThisQuiz = times.reduce((sum, t) => sum + t, 0);
+  const questionsThisQuiz = times.length;
+
+  categoryTimeStats[category].totalTime += totalThisQuiz;
+  categoryTimeStats[category].totalQuestions += questionsThisQuiz;
+
+  // Save it to local storage every time it occurs!
+  localStorage.setItem("categoryTimeStats", JSON.stringify(categoryTimeStats));
+
+  // Update strongest/weakest display on score sidebar
+  updateStrengthDisplay();
+}
+
+// Updates the display of user's strongest and weakest suite
+async function updateStrengthDisplay() {
+  let best = null;
+  let worst = null;
+
+  for (const category in categoryTimeStats) {
+    const c = categoryTimeStats[category];
+    const avg = c.totalTime / c.totalQuestions;
+
+    if (!best || avg < best.avg) best = { category, avg };
+    if (!worst || avg > worst.avg) worst = { category, avg };
+  }
+
+  // Update sidebar
+  document.querySelector("#strongestCategory").textContent =
+    best ? `${best.category} (${best.avg.toFixed(1)}s average)` : "N/A";
+
+  document.querySelector("#weakestCategory").textContent =
+    worst ? `${worst.category} (${worst.avg.toFixed(1)}s average)` : "N/A";
+
+  // Reset the timers array
+  times = [];
 }
 
 // Returns the text value containing the content related to the current html object
 function decodeHTML(html) {
-  const txt = document.createElement("textArea");
+  const txt = document.createElement("textarea");
   txt.innerHTML = html;
   return txt.value;
 }

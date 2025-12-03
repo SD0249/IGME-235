@@ -7,7 +7,7 @@ class Vector2D {
 
     // Returns the magnitude of this vector
     magnitude() {
-        return Math.sqrt(this.x ** 2 + this.y ** 2); 
+        return Math.sqrt(this.x ** 2 + this.y ** 2);
     }
 
     // For faster calculation and prompt comparison

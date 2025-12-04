@@ -1,11 +1,14 @@
 // PIXI Initialization
 const WIDTH = 600;
 const HEIGHT = 600;
-let visuals = null;
+let gridGraphics;
+let shapeGraphics;
+let axesGraphics;
+const gridSpacing = 30;
 
 async function start() {
         // 1. Declare Pixi Application and Initialize the application asynchronously
-        const app = new PIXI.Application();
+        app = new PIXI.Application();
 
         await app.init({
                 width: WIDTH,
@@ -15,75 +18,98 @@ async function start() {
 
         document.querySelector('.grid').appendChild(app.canvas);
 
-        // 2. Center the Origin
+        // 2. Create PIXI.Graphics objects to draw things
+        gridGraphics = new PIXI.Graphics();
+        shapeGraphics = new PIXI.Graphics();
+
+        app.stage.addChild(gridGraphics);
+        app.stage.addChild(shapeGraphics);
+
+        // 3. Center the Origin (ORDER OF TRANSFORM MATTERS)
         // PIXI's (0,0) to center of the screen, and Y to point up!
         app.stage.position.set(WIDTH / 2, HEIGHT / 2);
         app.stage.scale.y = -1;
 
-        // 3. Create a PIXI.Graphics object to draw everything
-        visuals = new PIXI.Graphics();
-        app.stage.addChild(visuals);
-
         // OPTIONAL: If zooming in makes the tool more useful for users, then do so
 
         DisplayGrid();
+        DrawVisualization();
 
-        drawVisualization();
+        console.log("gridGraphics in stage?", app.stage.children.includes(gridGraphics));
 }
 
 
-// Function to draw grid lines
+// Function to draw grid lines 
+// (Line drawing here does not work for some reason, 
+//  so it had to be done this way..)
 function DisplayGrid() {
-
-        // Clear the previous transformation/drawing
+        // Clear the previous record
         // -> OPTIONAL: This might be changed if visual tracing (stretch features) are implemented
-        visuals.clear();
+        gridGraphics.clear();
 
-        // Draw Grid Lines
-        visuals.lineStyle(1, 0xCCCCCC, 1);
-        for (let i = -300; i <= 300; i += 30) {
-                // Draw vertical lines
-                visuals.moveTo(i, -300);
-                visuals.lineTo(i, 300);
+        const gridColor = 0xCCCCCC;
+        const axisColor = 0x000000;
 
-                // Draw horizontal lines
-                visuals.moveTo(-300, i);
-                visuals.lineTo(300, i);
+        // Draw grid lines as thin filled rectangles
+        for (let i = -300; i <= 300; i += gridSpacing) {
+                // Vertical grid line
+                gridGraphics.beginFill(gridColor);
+                gridGraphics.drawRect(i, -300, 1, 600); // x, y, width, height
+                gridGraphics.endFill();
+
+                // Horizontal grid line
+                gridGraphics.beginFill(gridColor);
+                gridGraphics.drawRect(-300, i, 600, 1); // x, y, width, height
+                gridGraphics.endFill();
         }
 
-        // Draw Main Axes
-        visuals.lineStyle(2, 0x000000, 1);
-        visuals.moveTo(-300, 0); visuals.lineTo(300, 0); // X-axis
-        visuals.moveTo(0, -300); visuals.lineTo(0, 300); // Y-axis
+        // Draw main axes as thicker rectangles
+        axesGraphics = new PIXI.Graphics();
+        app.stage.addChild(axesGraphics);
+        const axisWidth = 3; 
+        const axisLength = 598;
+
+        // X-axis
+        axesGraphics.beginFill(axisColor);
+        axesGraphics.drawRect(-299, -3, axisLength, axisWidth);
+        axesGraphics.endFill();
+
+        // Y-axis
+        axesGraphics.beginFill(axisColor);
+        axesGraphics.drawRect(-3, -299, axisWidth, axisLength);
+        axesGraphics.endFill();
 }
 
 // Draw visuals, shape and its transformation
-function drawVisualization() {
+function DrawVisualization() {
+        // Clear previous drawing (will be adjusted if line tracing feature will be added)
+        shapeGraphics.clear();
+
         // Define the shape vertices
         // TEST -> House (TODO: Add more shapes, maybe use enum)
         const houseVertices = [
-                new Vector2D(-2, 0),
-                new Vector2D(2, 0),
-                new Vector2D(2, 3),
-                new Vector2D(0, 5),
-                new Vector2D(-2, 3)
+                new Vector2D(0 * gridSpacing, 0 * gridSpacing),
+                new Vector2D(3 * gridSpacing, 0 * gridSpacing),
+                new Vector2D(3 * gridSpacing, 2 * gridSpacing),
+                new Vector2D(1.5 * gridSpacing, 3.5 * gridSpacing),
+                new Vector2D(0 * gridSpacing, 2 * gridSpacing)
         ];
 
         // TEST -> data is NOT given from here
-        const M_total = new Matrix3x3([2, 1.5, 0, 0, 1, 0, 0, 0, 1]);
+        const M_total = new Matrix3x3([1, 0, 0, 0, 1, 0, 0, 0, 1]);
 
-        visuals.lineStyle(3, 0x00AA00, 1); // Green for the transformed shape
-        visuals.beginFill(0x00AA00, 0.1); // Light fill
+        shapeGraphics.lineStyle(3, 0x00AA00, 1); // Green for the transformed shape
+        shapeGraphics.beginFill(0x00AA00, 0.1); // Light fill
 
         let firstTransformed = M_total.multiplyVector(houseVertices[0]);
-        visuals.moveTo(firstTransformed.x * 30, firstTransformed.y * 30);
+        shapeGraphics.moveTo(firstTransformed.x, firstTransformed.y);
 
         for (let i = 1; i < houseVertices.length; i++) {
                 let transformed = M_total.multiplyVector(houseVertices[i]);
-                visuals.lineTo(transformed.x * 30, transformed.y * 30);
+                shapeGraphics.lineTo(transformed.x, transformed.y);
         }
-        visuals.lineTo(firstTransformed.x * 30, firstTransformed.y * 30); // Close the shape
-        visuals.endFill();
+        shapeGraphics.lineTo(firstTransformed.x, firstTransformed.y); // Close the shape
+        shapeGraphics.endFill();
 }
 
 start();

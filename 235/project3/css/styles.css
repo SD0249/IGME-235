@@ -1,0 +1,6 @@
+/* Readonly values for input matrix */
+input[readonly] {
+    background-color: #eee; 
+    cursor: not-allowed;    
+    color: #888;         
+}

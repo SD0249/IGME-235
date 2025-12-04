@@ -82,7 +82,7 @@ class Matrix3x3 {
             this.e31 * matrix.e13 + this.e32 * matrix.e23 + this.e33 * matrix.e33);
     }
 
-    // Vector Multiplication with this matrix
+    // Vector2D Multiplication with this matrix
     multiplyVector(vector) {
         let homogenuousCoordinate = [this.e11 * vector.x + this.e12 * vector.y + this.e13,
         this.e21 * vector.x + this.e22 * vector.y + this.e23,

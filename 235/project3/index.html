@@ -11,84 +11,68 @@
 
 <body>
     <nav class="top">
-        <div id="title"><h1>Refactor</h1></div>
+        <div id="title">
+            <h1>Refactor</h1>
+        </div>
     </nav>
 
     <div class="main">
         <div class="inputUI">
             <h3>Transformation Matrix (Input)</h3>
             <div class="matrixInputGrid">
-                <input type="text" 
-                   id="e11_input" 
-                   value="1" 
-                   placeholder="Scale X / cos(θ)" 
-                   title="Set this to Scale X, or cos(θ) for Rotation. (e.g., 60d)"
-                   step="0.1">
-                <input type="text" 
-                    id="e12_input" 
-                    value="0" 
-                    placeholder="Shear X / -sin(θ)" 
-                    title="Set this to Shear X, or -sin(θ) for Rotation. (e.g., 60d)"
+                <input type="text" id="e11_input" value="1" placeholder="Scale X / cos(θ)"
+                    title="Set this to Scale X, or cos(θ) for Rotation. (e.g., 60d)" step="0.1">
+                <input type="text" id="e12_input" value="0" placeholder="Shear X / -sin(θ)"
+                    title="Set this to Shear X, or -sin(θ) for Rotation. (e.g., 60d)" step="0.1">
+                <input type="number" id="e13_input" value="0" placeholder="Translate X" title="Set this to Translate X."
                     step="0.1">
-                <input type="number" 
-                    id="e13_input" 
-                    value="0" 
-                    placeholder="Translate X" 
-                    title="Set this to Translate X."
+                <input type="text" id="e21_input" value="0" placeholder="Shear Y / sin(θ)"
+                    title="Set this to Shear Y, or sin(θ) for rotation. (e.g., 60d)" step="0.1">
+                <input type="text" id="e22_input" value="1" placeholder="Scale Y / cos(θ)"
+                    title="Set this to Scale Y, or cos(θ) for rotation. (e.g., 60d)" step="0.1">
+                <input type="number" id="e23_input" value="0" placeholder="Translate Y" title="Set this to Translate Y."
                     step="0.1">
-                <input type="text" 
-                    id="e21_input" 
-                    value="0" 
-                    placeholder="Shear Y / sin(θ)" 
-                    title="Set this to Shear Y, or sin(θ) for rotation. (e.g., 60d)"
-                    step="0.1">
-                <input type="text" 
-                    id="e22_input" 
-                    value="1" 
-                    placeholder="Scale Y / cos(θ)" 
-                    title="Set this to Scale Y, or cos(θ) for rotation. (e.g., 60d)"
-                    step="0.1">
-                <input type="number" 
-                    id="e23_input" 
-                    value="0" 
-                    placeholder="Translate Y" 
-                    title="Set this to Translate Y."
-                    step="0.1">
-                <input type="number" 
-                    id="e31_input" 
-                    value="0"
-                    readonly  
-                    title="Fixed value for Affine Transformation">
-                <input type="number" 
-                    id="e32_input" 
-                    value="0" 
-                    readonly 
-                    title="Fixed value for Affine Transformation">
-                <input type="number" 
-                    id="e33_input" 
-                    value="1"
-                    readonly 
-                    title="Fixed value for Affine Transformation">
+                <input type="number" id="e31_input" value="0" readonly title="Fixed value for Affine Transformation">
+                <input type="number" id="e32_input" value="0" readonly title="Fixed value for Affine Transformation">
+                <input type="number" id="e33_input" value="1" readonly title="Fixed value for Affine Transformation">
             </div>
 
             <div class="mainControls">
-            <button id="applyButton">Apply</button>
-            <button id="resetButton">Reset</button>
+                <button id="applyButton">Apply</button>
+                <button id="resetButton">Reset</button>
             </div>
 
             <div class="historyControls">
-            <button id="undoButton">← Undo</button>
-            <button id="redoButton">Redo →</button>
+                <button id="undoButton">← Undo</button>
+                <button id="redoButton">Redo →</button>
             </div>
 
             <div class="determinantOutput">
-            <strong>Area Scale Factor (Determinant):</strong> 
-            <span id="determinant-value">1.0</span>
+                <strong>Area Scale Factor (Determinant):</strong>
+                <span id="determinant-value">1.0</span>
             </div>
 
             <div class="totalMatrix">
                 <h3>Current Total Transformation Matrix</h3>
                 <div id="totalMatrixOutputGrid">
+                    <input type="text" id="e11_input" value="1" readonly placeholder="Scale X / cos(θ)"
+                        title="Set this to Scale X, or cos(θ) for Rotation. (e.g., 60d)">
+                    <input type="text" id="e12_input" value="0" readonly placeholder="Shear X / -sin(θ)"
+                        title="Set this to Shear X, or -sin(θ) for Rotation. (e.g., 60d)">
+                    <input type="number" id="e13_input" value="0" readonly placeholder="Translate X"
+                        title="Set this to Translate X.">
+                    <input type="text" id="e21_input" value="0" readonly placeholder="Shear Y / sin(θ)"
+                        title="Set this to Shear Y, or sin(θ) for rotation. (e.g., 60d)">
+                    <input type="text" id="e22_input" value="1" readonly placeholder="Scale Y / cos(θ)"
+                        title="Set this to Scale Y, or cos(θ) for rotation. (e.g., 60d)">
+                    <input type="number" id="e23_input" value="0" readonly placeholder="Translate Y"
+                        title="Set this to Translate Y.">
+                    <input type="number" id="e31_input" value="0" readonly
+                        title="Fixed value for Affine Transformation">
+                    <input type="number" id="e32_input" value="0" readonly
+                        title="Fixed value for Affine Transformation">
+                    <input type="number" id="e33_input" value="1" readonly
+                        title="Fixed value for Affine Transformation">
                 </div>
             </div>
         </div>
@@ -107,6 +91,7 @@
     <!-- Linking Custom Scripts -->
     <script src="javascript/Vector2D.js"></script>
     <script src="javascript/Matrix3x3.js"></script>
+    <script src="javascript/stack.js"></script>
     <script src="javascript/GUIManager.js"></script>
     <script src="javascript/main.js"></script>
 </body>

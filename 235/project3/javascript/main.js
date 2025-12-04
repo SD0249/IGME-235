@@ -1,11 +1,31 @@
 // PIXI Initialization
 const WIDTH = 600;
 const HEIGHT = 600;
+
+let app;
 let gridGraphics;
 let shapeGraphics;
 let axesGraphics;
-let M_total = new Matrix3x3();;
+let M_total = new Matrix3x3();
 const gridSpacing = 30;
+
+const shapeOptions = {
+        House: [
+                new Vector2D(0 * gridSpacing, 0 * gridSpacing),
+                new Vector2D(3 * gridSpacing, 0 * gridSpacing),
+                new Vector2D(3 * gridSpacing, 2 * gridSpacing),
+                new Vector2D(1.5 * gridSpacing, 3.5 * gridSpacing),
+                new Vector2D(0 * gridSpacing, 2 * gridSpacing)
+        ],
+        Square: [
+                new Vector2D(0 * gridSpacing, 0 * gridSpacing),
+                new Vector2D(3 * gridSpacing, 0 * gridSpacing),
+                new Vector2D(3 * gridSpacing, 2 * gridSpacing),
+                new Vector2D(1.5 * gridSpacing, 3.5 * gridSpacing),
+                new Vector2D(0 * gridSpacing, 2 * gridSpacing)
+        ],
+        Circle
+}
 
 async function start() {
         // 1. Declare Pixi Application and Initialize the application asynchronously
@@ -67,7 +87,7 @@ function DisplayGrid() {
         // Draw main axes as thicker rectangles
         axesGraphics = new PIXI.Graphics();
         app.stage.addChild(axesGraphics);
-        const axisWidth = 3; 
+        const axisWidth = 3;
         const axisLength = 598;
 
         // X-axis
@@ -81,7 +101,7 @@ function DisplayGrid() {
         axesGraphics.endFill();
 }
 
-// Draw visuals, shape and its transformation
+// Draw Chosen Shape on Grid
 function DrawVisualization() {
         // Clear previous drawing (will be adjusted if line tracing feature will be added)
         shapeGraphics.clear();

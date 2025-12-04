@@ -4,6 +4,7 @@ const HEIGHT = 600;
 let gridGraphics;
 let shapeGraphics;
 let axesGraphics;
+let M_total = new Matrix3x3();;
 const gridSpacing = 30;
 
 async function start() {
@@ -96,7 +97,7 @@ function DrawVisualization() {
         ];
 
         // TEST -> data is NOT given from here
-        const M_total = new Matrix3x3([1, 0, 0, 0, 1, 0, 0, 0, 1]);
+        // M_total = new Matrix3x3([1, 0, 0, 0, 1, 0, 0, 0, 1]);
 
         shapeGraphics.lineStyle(3, 0x00AA00, 1); // Green for the transformed shape
         shapeGraphics.beginFill(0x00AA00, 0.1); // Light fill

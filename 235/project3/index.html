@@ -18,6 +18,15 @@
 
     <div class="main">
         <div class="inputUI">
+            <h3>Shape Choice</h3>
+            <div class="shapeChoice">
+                <select id="shapeChoice" title="Choose the shape you'd like to work with!">
+                    <option value="house">House(Default)</option>
+                    <option value="square">Sqaure</option>
+                    <option value="heart">Heart</option>
+                </select>
+            </div>
+
             <h3>Transformation Matrix (Input)</h3>
             <div class="matrixInputGrid">
                 <input type="text" id="e11_input" value="1" placeholder="Scale X / cos(θ)"
@@ -49,30 +58,21 @@
 
             <div class="determinantOutput">
                 <strong>Area Scale Factor (Determinant):</strong>
-                <span id="determinant-value">1.0</span>
+                <span id="determinantValue">1.0</span>
             </div>
 
             <div class="totalMatrix">
                 <h3>Current Total Transformation Matrix</h3>
                 <div id="totalMatrixOutputGrid">
-                    <input type="text" id="e11_input" value="1" readonly placeholder="Scale X / cos(θ)"
-                        title="Set this to Scale X, or cos(θ) for Rotation. (e.g., 60d)">
-                    <input type="text" id="e12_input" value="0" readonly placeholder="Shear X / -sin(θ)"
-                        title="Set this to Shear X, or -sin(θ) for Rotation. (e.g., 60d)">
-                    <input type="number" id="e13_input" value="0" readonly placeholder="Translate X"
-                        title="Set this to Translate X.">
-                    <input type="text" id="e21_input" value="0" readonly placeholder="Shear Y / sin(θ)"
-                        title="Set this to Shear Y, or sin(θ) for rotation. (e.g., 60d)">
-                    <input type="text" id="e22_input" value="1" readonly placeholder="Scale Y / cos(θ)"
-                        title="Set this to Scale Y, or cos(θ) for rotation. (e.g., 60d)">
-                    <input type="number" id="e23_input" value="0" readonly placeholder="Translate Y"
-                        title="Set this to Translate Y.">
-                    <input type="number" id="e31_input" value="0" readonly
-                        title="Fixed value for Affine Transformation">
-                    <input type="number" id="e32_input" value="0" readonly
-                        title="Fixed value for Affine Transformation">
-                    <input type="number" id="e33_input" value="1" readonly
-                        title="Fixed value for Affine Transformation">
+                    <input type="text" id="e11_total" value="1" readonly>
+                    <input type="text" id="e12_total" value="0" readonly>
+                    <input type="number" id="e13_total" value="0" readonly>
+                    <input type="text" id="e21_total" value="0" readonly>
+                    <input type="text" id="e22_total" value="1" readonly>
+                    <input type="number" id="e23_total" value="0" readonly>
+                    <input type="number" id="e31_total" value="0" readonly>
+                    <input type="number" id="e32_total" value="0" readonly>
+                    <input type="number" id="e33_total" value="1" readonly>
                 </div>
             </div>
         </div>

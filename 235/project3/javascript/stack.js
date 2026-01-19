@@ -28,4 +28,16 @@ class Stack {
     isEmpty() {
         return this.list.length === 0;
     }
+
+    toArray() {
+        let customArray = [];
+
+        for(const matrix of this.list) {
+            if(matrix instanceof Matrix3x3) {
+                customArray.push(matrix.copy());
+            }
+        }
+
+        return customArray;
+    }
 }

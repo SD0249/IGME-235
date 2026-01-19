@@ -1,3 +1,21 @@
+// Sound components that communicate successful workings 
+const correctSound = new Howl({
+    src: ['media/sound/546081__stavsounds__correct3.wav'],
+    autoplay: false,
+    loop: false,
+    volume: 0.35
+});
+
+const NASound = new Howl({
+    src: ['media/sound/483598__raclure__wrong.mp3'],
+    autoplay: false,
+    loop: false,
+    volume: 0.5
+});
+
+// Accessing the History Popup element
+const historyPopupElement = document.getElementById('historyPopup');
+
 // Converts angle degree value to radians
 function degreesToRadians(degrees) {
     return degrees * (Math.PI / 180);
@@ -63,6 +81,9 @@ function handleApply() {
 
     // 5. Update previous total matrix
     previousTotalMatrix = currentTotalMatrix.copy();
+
+    // 6. Play feedback sound
+    correctSound.play();
 }
 
 // Draws the current total transformation applied
@@ -129,12 +150,16 @@ function Reset() {
 // the shape is transformed back to the previous transformation.
 function Undo() {
     // Check whether undo action can be performed
-    if(backwardStack.isEmpty()) return;
+    if(backwardStack.isEmpty()) 
+    {
+        NASound.play();
+        return;
+    }
 
     // 1. Pop the latest matrix from backwardStack and push it to forwardStack
     forwardStack.Push(backwardStack.Pop());
     
-    // 2. Recomput the current total matrix by multiplying all matrices in the backwardstack
+    // 2. Recompute the current total matrix by multiplying all matrices in the backwardstack
     currentTotalMatrix.identity();
 
     // Create a temporary array of all matrices currently in the stack
@@ -145,7 +170,7 @@ function Undo() {
         currentTotalMatrix = remainingMatrices[i].multiplyMatrix(currentTotalMatrix);
     }
 
-    // 3. Update previousTotalMatrix
+    // 3. Recompute previousTotalMatrix
     previousTotalMatrix.identity();
 
     for(let i = 0; i < remainingMatrices.length - 1; i++) {
@@ -162,19 +187,71 @@ function Undo() {
 // the shape is transformed back to where it was before clicking undo
 function Redo() {
     // Check whether redo action can be performed
-    if(forwardStack.isEmpty()) return;
+    if(forwardStack.isEmpty())
+    {
+        NASound.play();
+        return;
+    }    
 
-    // TODO: Fix Undo()
-    // Re-apply the transformation on top of the forward stack &
-    // update current total matrix
-    previousTotalMatrix = backwardStack.Peek().multiplyMatrix(previousTotalMatrix);
+    // 1. Pop the latest matrix from forwardstack and push it to backward stack
     backwardStack.Push(forwardStack.Pop());
-    currentTotalMatrix = backwardStack.Peek().multiplyMatrix(currentTotalMatrix);
-    
+
+    // 2. Recompute the current total matrix by multiplying all matrices in the backwardstack
+    currentTotalMatrix.identity();
+
+    // Create a temporary array of all matrices currently in the stack
+    const remainingMatrices = backwardStack.toArray();
+
+    // Multiply them in order
+    for(let i = 0; i < remainingMatrices.length; i++) {
+        currentTotalMatrix = remainingMatrices[i].multiplyMatrix(currentTotalMatrix);
+    }
+
+    // 3. Recompute previousTotalMatrix
+    previousTotalMatrix.identity();
+
+    for(let i = 0; i < remainingMatrices.length - 1; i++) {
+        previousTotalMatrix = remainingMatrices[i].multiplyMatrix(previousTotalMatrix);
+    }
+
     // Update Displays
     UpdateDeterminantDisplay();
     UpdateMatrixTotalDisplay();
     UpdateVisualization();
+}
+
+// Display the transformation matrices applied from each stacks when they are hovered
+function displayHistory(stack, isRedoStack) {
+    const matrices = stack.toArray().reverse();
+    let html = isRedoStack ? '<h3>Redo History (Forward)</h3>' : '<h3>Undo History (Backward)</h3>'
+
+    if(matrices.length === 0) {
+        historyPopupElement.innerHTML = html + '<p>No Operation available</p>';
+        historyPopupElement.classList.remove('hidden');
+        return;
+    }
+
+    matrices.forEach((matrix, index) => {
+        const translationX = (matrix.e13 / gridSpacing);
+        const translationY = (matrix.e23 / gridSpacing);
+
+        html += `<div class="historyItem">
+                    <strong>${matrices.length - index}.</strong>
+                    <div class="historyMatrix">
+                        <span>${matrix.e11.toFixed(2)}</span><span>${matrix.e12.toFixed(2)}</span><span>${translationX}</span>
+                        <span>${matrix.e21.toFixed(2)}</span><span>${matrix.e22.toFixed(2)}</span><span>${translationY}</span>
+                        <span>${matrix.e31.toFixed(2)}</span><span>${matrix.e32.toFixed(2)}</span><span>${matrix.e33.toFixed(2)}</span>
+                    </div>
+                </div>`;
+    });
+
+    historyPopupElement.innerHTML = html;
+    historyPopupElement.classList.remove('hidden');
+}
+
+// When cursor leaves from hovering, stop displaying all the matrices from the stack
+function hideHistory() {
+    historyPopupElement.classList.add('hidden');
 }
 
 // Attach handler to the Apply button
@@ -185,6 +262,13 @@ document.getElementById('resetButton').addEventListener('click', Reset);
 
 // Attach handler to Undo button
 document.getElementById('undoButton').addEventListener('click', Undo);
+document.getElementById('undoButton').addEventListener('mouseenter', () => displayHistory(backwardStack, false));
+document.getElementById('undoButton').addEventListener('mouseleave', hideHistory);
 
 // Attach handler to Redo button
 document.getElementById('redoButton').addEventListener('click', Redo);
+document.getElementById('redoButton').addEventListener('mouseenter', () => displayHistory(forwardStack, true));
+document.getElementById('redoButton').addEventListener('mouseleave', hideHistory);
+
+
+

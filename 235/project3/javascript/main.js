@@ -7,6 +7,7 @@ let gridGraphics;
 let shapeGraphics;
 let lineTracingGraphics;
 let axesGraphics;
+let basisGraphics;
 const gridSpacing = 30;
 
 // Undo and Redo Stack
@@ -61,10 +62,12 @@ async function start() {
         gridGraphics = new PIXI.Graphics();
         shapeGraphics = new PIXI.Graphics();
         lineTracingGraphics = new PIXI.Graphics();
+        basisGraphics = new PIXI.Graphics();
 
         app.stage.addChild(gridGraphics);
         app.stage.addChild(shapeGraphics);
         app.stage.addChild(lineTracingGraphics);
+        app.stage.addChild(basisGraphics);
 
         // 3. Center the Origin (ORDER OF TRANSFORM MATTERS)
         // PIXI's (0,0) to center of the screen, and Y to point up!
@@ -87,7 +90,6 @@ function DisplayGrid() {
         gridGraphics.clear();
 
         const gridColor = 0xCCCCCC;
-        const axisColor = 0x000000;
 
         // Draw grid lines as thin filled rectangles
         for (let i = -300; i <= 300; i += gridSpacing) {
@@ -107,15 +109,32 @@ function DisplayGrid() {
         app.stage.addChild(axesGraphics);
         const axisWidth = 3;
         const axisLength = 598;
+        const arrowSize = 12;
 
         // X-axis
-        axesGraphics.beginFill(axisColor);
+        axesGraphics.beginFill(0xFF0000); // Red
         axesGraphics.drawRect(-299, -3, axisLength, axisWidth);
+        axesGraphics.drawPolygon([
+                // Tip
+                300, 0,
+                // Upper Bottom
+                300 - arrowSize, arrowSize/2,
+                // Lower Bottom
+                300 - arrowSize, -arrowSize/2
+        ]);
         axesGraphics.endFill();
 
         // Y-axis
-        axesGraphics.beginFill(axisColor);
+        axesGraphics.beginFill(0x0000FF); // Blue
         axesGraphics.drawRect(-3, -299, axisWidth, axisLength);
+        axesGraphics.drawPolygon([
+                // Tip
+                0, 300,
+                // Left point
+                -arrowSize / 2, 300 - arrowSize,
+                // Right point
+                arrowSize / 2, 300 - arrowSize
+        ]);
         axesGraphics.endFill();
 }
 
@@ -145,16 +164,30 @@ function DrawVisualization() {
 
         // Line Tracing
         LineTracing(shapeVertices);
+
+        // Transformed i vector (Red)
+        // const i_x = currentTotalMatrix.e11 * gridSpacing;
+        // const i_y = currentTotalMatrix.e21 * gridSpacing;
+
+        // // Transformed j vector (Blue)
+        // const j_x = currentTotalMatrix.e12 * gridSpacing;
+        // const j_y = currentTotalMatrix.e22 * gridSpacing;
+
+        // // Draw Transformed Basis Vector
+        // basisGraphics.clear();
+
+        // basisGraphics.beginFill(0xFF8DA1);
+        // basisGraphics.drawRect(1, 0, i_x, i_y);
+        // basisGraphics.endFill();
+
+        // basisGraphics.beginFill(0xFFDE21);
+        // basisGraphics.drawRect(0, 1, j_x, j_y);
+        // basisGraphics.endFill();
 }
 
 // Draw the chosen shape on Grid with transformations 
 // right up to the previous one (Draw Visualization but one that uses previous matrix)
 function LineTracing(shapeVertices) {
-        // Assume that this function is called inside the DrawVisualization function - 
-        // shapeGraphics.clear();
-        // ReadShapeChoice();
-        // const shapeVertices = shapeChoice;
-
         lineTracingGraphics.clear();
 
         if(backwardStack.isEmpty()) return;

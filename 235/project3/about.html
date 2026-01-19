@@ -14,6 +14,7 @@
     <header>
         <h1><i class="fas fa-cube"></i> Refactor :</h1>
         <h1>A 2D Linear Transformation Visualizer</h1>
+        <a href="index.html">Link to Project</a>
     </header>
 
     <main class="grid-container">
@@ -58,21 +59,81 @@
                 </ul>
             </section>
 
-            <section id="mockups">
-                <h2><i class="fas fa-paint-brush"></i> Mockups</h2>
-                <div class="mockup-row">
-                    <figure class="mockup-item">
-                        <img src="media/mockup1_before_final.png" alt="Mockup 1: Initial State" class="responsive-img">
-                        <figcaption>Mockup 1: Initial State and Control Panel. Shows the untransformed House, basis
-                            vectors, and the GUI (identity matrix).</figcaption>
-                    </figure>
-                    <figure class="mockup-item">
-                        <img src="media/mockup2_after_final.png" alt="Mockup 2: Transformed State"
-                            class="responsive-img">
-                        <figcaption>Mockup 2: Transformed State with Tracing and Interactive History. Shows the
-                            rotated/scaled House and the history dropdown.</figcaption>
-                    </figure>
-                </div>
+            <section id="documentation">
+                <h2><i class="fas fa-book-open"></i> Project Documentation: Refactor</h2>
+
+                <section id="process-summary">
+                    <h3>1. Development Process and Timeline</h3>
+                    <h4>A) Setup and Core Data Structures</h4>
+                    <ul>
+                        <li>Created the core math classes: <strong>Matrix3x3</strong> and <strong>Vector2D</strong>.</li>
+                        <li>Established the PIXI.js environment and implemented the coordinate system inversion (Y-up, Origin-centered).</li>
+                        <li>Implemented matrix multiplication and vector transformation logic.</li>
+                    </ul>
+                    
+                    <h4>B) MVP Implementation</h4>
+                    <ul>
+                        <li>Implemented the main transformation logic (<strong>handleApply</strong>) and the UI linkage.</li>
+                        <li>Implemented <strong>parseElementValue</strong> to handle degree notation (e.g., '90d') for rotation automatically.</li>
+                        <li>Successfully displayed the transformed shape and the Determinant.</li>
+                    </ul>
+                    
+                    <h4>C) Advanced Features & Refinement</h4>
+                    <ul>
+                        <li><u>Undo/Redo Stability:</u> Refactored history management to use the "Recompute Total" method instead of relying on floating-point-sensitive matrix inversion for better stability across chained transformations (especially translation).</li>
+                        <li><u>Visual Tracing:</u> Implemented the LineTracing feature using the previousTotalMatrix</li>
+                        <li><u>UI/UX:</u> Implemented the Basis Vector display and the CSS for the Matrix History Popups on hover.</li>
+                        <li><u>Sound:</u> Adding Sound with Howler Object</li>
+                    </ul>
+                </section>
+
+                <section id="citations-sources">
+                    <h3>2. External Sources and Citations</h3>
+                    <ul>
+                        <li><strong>Primary Library:</strong> PIXI.js</li>
+                        <li><strong>Mathematics Reference:</strong> The concept and implementation of 3x3 Affine Transformation matrices (homogeneous coordinates) was guided by 'Physics for Game Developers'.</li>
+                        <li><strong>Icons:</strong> Font Awesome 6.5.1</li>
+                        <li><strong>Freesound.org: All the sound effects are downloaded from here.</strong></li>
+                        <li><strong>Google Gemini:</strong> Assistance in Project Scoping, Documentation, and new PIXI Syntax</li>
+                    </ul>
+                </section>
+
+                <section id="requirement-fulfillment">
+                    <h3> 3. Meeting Project Requirements</h3>
+                    <h4>Core Requirements Checklist:</h4>
+                    <ul>
+                        <li><strong>3x3 Affine Matrix Transformation:</strong> Implemented fully in Matrix3x3.js, supporting Scaling (e11, e22), Shearing (e12, e21), Rotation(e11, e12, e21, e22), and Translation (e13, e23).</li>
+                        <li><strong>User Input & Visualization:</strong> Direct input fields linked to the visualization using PIXI.js.</li>
+                        <li><strong>Concatenated Transformations:</strong> Each "Apply" operation correctly multiplies the new input matrix with the currentTotalMatrix, building a sequence of transformations.</li>
+                        <li><strong>Rotation by Degrees:</strong> The "parseElementValue" function successfully reads user inputs like "90d" and converts them to the correct cosine/sine values for rotation elements.</li>
+                        <li><strong>History Stack (Undo/Redo):</strong> Fully implemented using stack class instances with recomputation-based logic in "Undo" and "Redo".</li>
+                    </ul>
+                    
+                    <h4>Stretch Feature Fulfillment:</h4>
+                    <ul>
+                        <li><strong>Visual Tracing:</strong> Achieved via "LineTracing" using the previousTotalMatrix to draw the immediate prior state.</li>
+                        <li><strong>Interactive History:</strong> Achieved via history popup that shows when hovering over the Undo and Redo buttons, showing the matrix sequence.</li>
+                    </ul>
+                </section>
+                
+                <section id="special-notes">
+                    <h3>Note: Challenges</h3>
+
+                    <p>There were some challenges regarding the Undo and Redo feature when including translation, 
+                        because the inverse function in the Matrix class I've written couldn't fully handle all 
+                        of the floating point precision which is crucial to draw the previous/redo transformations. 
+                        For that reason, I had to choose to recompute the previous/current total matrix again every 
+                        time when the undo and redo functionality was needed. I thought this would be computationally expensive,
+                         but the processes are handled promptly, which I'm happy about. Also I had to write a stack class 
+                         to store the input matrices in the backward stack and forward stack, and it was a nice review 
+                         of writing my own data structure! 
+                    </p>
+
+                    <p>With PIXI, the line with the thickness of 1-4px won't be drawn on the screen, 
+                        so it was quite a challenge to draw the grid, but eventually I drew all of the 
+                        grid lines and axes with rectangles. 
+                    </p>
+                </section>
             </section>
         </section>
 
@@ -107,6 +168,23 @@
                     <li><strong>Visuals</strong>: PixiJS rendering for sharp, performant vector-like visuals and a clear Cartesian
                         grid.</li>
                 </ul>
+            </section>
+
+            <section id="mockups">
+                <h2><i class="fas fa-paint-brush"></i> Mockups</h2>
+                <div class="mockup-row">
+                    <figure class="mockup-item">
+                        <img src="media/mockup1_before_final.png" alt="Mockup 1: Initial State" class="responsive-img">
+                        <figcaption>Mockup 1: Initial State and Control Panel. Shows the untransformed House, basis
+                            vectors, and the GUI (identity matrix).</figcaption>
+                    </figure>
+                    <figure class="mockup-item">
+                        <img src="media/mockup2_after_final.png" alt="Mockup 2: Transformed State"
+                            class="responsive-img">
+                        <figcaption>Mockup 2: Transformed State with Tracing and Interactive History. Shows the
+                            rotated/scaled House and the history dropdown.</figcaption>
+                    </figure>
+                </div>
             </section>
 
             <section id="other">

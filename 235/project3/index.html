@@ -7,6 +7,9 @@
 
     <!-- Linking StyleSheet -->
     <link rel="stylesheet" href="css/styles.css">
+
+    <!-- Linking Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -56,6 +59,9 @@
                 <button id="redoButton">Redo →</button>
             </div>
 
+            <div id="historyPopup" class="historyPopup hidden">
+            </div>
+
             <div class="determinantOutput">
                 <strong>Area Scale Factor (Determinant):</strong>
                 <span id="determinantValue">1.0</span>
@@ -82,7 +88,10 @@
         </div>
     </div>
 
-
+    <!-- Link to Proposal -->
+    <div class="documentLink">
+        <a href="about.html">Project Documentation</a>
+    </div>
 
     <!-- Linking External Libraries -->
     <script src="https://pixijs.download/release/pixi.min.js"></script>
